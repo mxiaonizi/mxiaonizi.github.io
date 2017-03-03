@@ -1,0 +1,111 @@
+body{
+	color: #666666;;
+}
+.medicine{
+	margin: 0 auto;
+	font-size: 14px;
+	padding-top: 40px;
+	border-top: 1px solid #d9dfe2;
+}
+.medicine .medicine_head{
+	width: 1280px;
+	margin: 0 auto;
+	border-bottom: 1px solid #e3e3e3;
+	padding-bottom: 30px;
+	text-align: center;
+}
+.medicine .medicine_head .top{
+	width: 848px;
+	margin: 0 auto;
+	padding-bottom: 30px;
+	text-align: center;
+	font-size: 0;
+}
+.medicine .medicine_head .top a{
+	height: 20px;
+	line-height: 20px;
+	border-left: 1px solid #d9dfe2;
+	border-right: 1px solid #d9dfe2;
+	padding: 0 30px;
+	color: #666666;
+	font-size: 14px;
+	display: inline-block;
+	margin-right: -1px;
+}
+.medicine .medicine_head .top a.active{
+	color: #bac4ca;
+}
+.medicine .medicine_head p{
+	/*width: 98px;*/
+	height: 27px;
+	line-height: 27px;
+	border: 1px solid#d4dade;
+	background-color: #afbac1;
+	color: #fcfdfd;
+	text-align: center;
+	/*margin: 0 auto;*/
+	display: inline-block;
+	padding: 0 10px;
+}
+/*主体*/
+.medicine .main{
+	width: 1280px;
+	margin: 0 auto;
+}
+.medicine .main .main_top{
+	padding: 70px 100px 50px 125px;
+	border-bottom: 1px solid #e9edf0;
+}
+.medicine .main .main_top a{
+	width: 523px;
+	height: 330px;
+	margin-right: 58px;
+}
+.medicine .main .main_top .used_for{
+	
+}
+.medicine .main .main_top .used_for h4{
+	font-size: 26px;
+	line-height: 72px;
+	margin-bottom: 27px;
+}
+.main_top .used_for .info{
+	width: 464px;
+	border-top: 1px solid #e9edf0;
+	margin-left: 10px;
+	line-height: 18px;
+	color: #666666;
+	padding-top: 20px;
+}
+.main_top .used_for .info p{
+	margin-bottom: 10px;
+}
+/*药品说明*/
+.medicine_intro{
+	
+}
+.medicine_intro .tag{
+	border-bottom: 1px solid #e9edf0;
+	padding-left: 103px;
+}
+.medicine_intro .tag a{
+	width: 80px;
+	height: 80px;
+	line-height: 80px;
+	border-radius: 50%;
+	border: 1px solid #afbac1;
+	color: #666666;
+	text-align: center;
+	margin: 25px 35px 18px 0;
+	
+}
+.medicine_intro .tag a.active{
+	color: #FFFFFF;
+	background-color: #afbac1;
+}
+.medicine_intro .medicine_intro_detail{
+	padding: 20px 103px 20px 103px;
+}
+.medicine_intro .medicine_intro_detail p{
+	line-height: 30px;
+}

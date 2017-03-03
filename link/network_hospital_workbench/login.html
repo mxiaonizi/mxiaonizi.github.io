@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>登录页面</title>
+    <link rel="shortcut icon" href="images/loginavatar.png"/>
+    <link rel="icon" href="images/loginavatar.png" type="image/png"/>  
+    <link rel="stylesheet" href="css/reset.css"/>
+    <link rel="stylesheet" href="bootstrap-3.3.4/dist/css/bootstrap.min.css"/>  
+    <link rel="stylesheet" href="css/login.css"/>
+    <script src="js/jquery-1.11.1.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="left-box">
+            <div class="content-box">
+                <img src="images/loginlogo.png" alt=""/>
+                <h4>工作站</h4>
+            </div>
+            <div class="glyphicon glyphicon-triangle-left"></div>
+        </div>
+        <div class="right-box">
+            <div class="content-box">
+                <h4>员工登录</h4>
+                <img src="images/loginavatar.png" alt=""/>
+                <div class="form-box">
+                    <form id="loginForm" action="WEB-INF/pages/staffNav.jsp" method="post">
+                        <div class="control-group">
+                            <div class="controls">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-user"></span>
+                                    </span>
+                                    <input name="LoginID" class="form-control col col-md-2 blur" type="text" placeholder=""/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-lock"></span>
+                                    </span>
+                                    <input name="Password" class="form-control col col-md-2 blur" type="password" placeholder=""/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="btn-box">
+                            <a href="pages/staffNav.html" class="btn btn-primary"  onclick="submitData();">登录</a>
+                        </div>
+                    </form>
+                </div>
+                <div class="psd-box">
+                    <!-- <a class="f-left" href="javascript:;">用户名或者密码错误</a> -->
+                    <a class="f-left" style="color:red !important;cursor: default;" href="javascript:;">错误提示</a>
+                    <a class="f-right" href="">找回密码</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>    	
+        $(function(){
+        	if(window != top){$("body").empty().append("<p style='margin:30px;font-size:18px;'>抱歉，您的页面走丢了，请重新打开</p>");return;}
+            var mL = $(".right-box").width()/2 - 175;
+            $(".right-box .content-box").css("margin-left",mL);
+            $(".form-control").focus(function(){
+	    		$(this).parent().css("background","#fff");	    		
+	    		$(this).toggleClass("focus");
+	    		$(this).toggleClass("blur");	    		
+	    	});
+	    	$(".form-control").blur(function(){
+	    		$(this).parent().css("background","#d8d8d8");
+	    		$(this).toggleClass("focus");
+	    		$(this).toggleClass("blur");
+	    	});
+            
+        });
+       /* function submitData(){
+    		$("#loginForm").submit();
+    	}*/
+    </script>
+</body>
+</html>

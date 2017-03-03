@@ -1,0 +1,3 @@
+1、缺手机号字段                        page2
+2、缺有几项荣耀的字段              deleDom
+4、缺保单数字段                        deleDom   modifyPage5

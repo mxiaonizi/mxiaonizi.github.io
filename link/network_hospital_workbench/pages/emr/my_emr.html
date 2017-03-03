@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>历史病历</title>
+    <link rel="stylesheet" href="../../css/emr/reset_yr.css">
+    <link rel="stylesheet" href="../../css/emr/common.css">
+    <link rel="stylesheet" href="../../css/emr/EMR_161110.css">
+    <!-- Bootstrap -->
+    <link href="../../css/emr/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+  	 <style>.containerEMR table.searchTable th{background:#efefef;}</style>    
+  	 <input type="hidden" id="UserID" value="${UserID }">
+  	 <input type="hidden" id="OrderNumber" value="${OrderNumber }">
+  	 <input type="hidden" id="EMRStatus" value="${EMRStatus }">
+     <div class="containerEMR">     
+     <div class="allEMR">
+     	<div class="EMRheader" style="margin-bottom:0">乐普网络医院&nbsp;患者病历</div>
+     	<div class="EMRnumber" style="text-align:right">病历编号<input type="text" lepuEMR-ID="HR00_00_001_05" readonly="readonly" class="EMRdata" style="border: 0;background: transparent;"></div>             
+          <div class="EMR">
+          	<div class="EMRcontent" style="min-height:680px;">                   
+                <div class="searchBox">
+                  <div><ul class="panelList searchList">
+                        <li><span class="labelName">起始时间：</span><input type="text" class="laydate-icon" id="StartDate" style="height:34px;"></li>
+                        <li><span class="labelName">终止日期：</span><input type="text" class="laydate-icon" id="EndDate" style="height:34px;"></li>
+                        <button class="handleButton" onclick="getEMRListByUser()">查&nbsp;询</button>  
+                  </ul></div>
+                  <table class="searchTable">
+                    <thead><tr><th>日期</th><th>医院</th><th>医生</th><th>病历详情</th></tr></thead>                    
+                    <tbody></tbody>               
+                  </table>                  
+                </div>
+          </div>       
+                        
+          </div>          
+          <div class="EMRhistory">             
+              <div class="EMRcontent">               
+                 <!-- Nav tabs -->
+                  <ul class="nav nav-tabs" role="tablist" id="abc">
+                    <li role="presentation"><a aria-controls="baseHistory" role="tab" data-toggle="tab">基本信息</a></li>
+                   	<!--  <li role="presentation"><a href="#healthHistory" aria-controls="health" role="tab" data-toggle="tab">健康相关</a></li> -->
+                    <li role="presentation" class="active"><a aria-controls="recordsHistory" role="tab" data-toggle="tab">就诊记录</a></li>
+                    <li role="presentation"><a aria-controls="scanHistory" role="tab" data-toggle="tab">扫描件</a></li>
+                  </ul>
+
+                  <!-- Tab panes -->
+                  <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane" id="baseHistory">                     
+                        <ul class="BaseList">
+                          <li><label class="baseLabel">姓名：</label>
+                          	  <input type="text" value="" readonly="readonly" lepuEMR-ID="HR02_01_002" class="EMRdata">
+                          	  <input type="hidden" value="" lepuEMR-ID="HR22_01_100" class="EMRdata" />
+                          	  <input type="hidden" value="" lepuEMR-ID="HR00_00_001_03" class="EMRdata" /></li>
+                          <li class="noArrow">
+                              <label class="baseLabel">性别：</label>
+                              <select name="" id="" disabled="disabled" lepuEMR-ID="HR02_02_001" class="EMRdata">
+                              	  <option value=""></option>
+                              	  <option value="0">未知</option>
+                                  <option value="1">男</option>
+                                  <option value="2">女</option>
+                                  <option value="9">未说明</option>
+                              </select>
+                          </li>
+                          <li><label class="baseLabel">出生日期：</label><input type="text" readonly="readonly" value="" lepuEMR-ID="HR30_00_001" class="EMRdata"></li>
+                          <li><label class="baseLabel">年龄：</label><input type="text" value="" readonly="readonly" class="age"></li>
+                          <li><label class="baseLabel">身份证号：</label><input type="text" readonly="readonly" value="" lepuEMR-ID="HR01_01_002_02" class="EMRdata"></li></li>
+                          <li><label class="baseLabel">手机号码：</label><input type="text" readonly="readonly" value="" lepuEMR-ID="HR04_00_001_03" class="EMRdata"></li></li>
+                         <!--  <li class="noArrow" >
+                              <label class="baseLabel">国籍：</label>
+                              <select name="" id="" disabled="disabled" value="44" lepuEMR-ID="HR02.04.001" class="EMRdata"><option value="44">中国</option></select></li> -->
+                          <li class="longData ssq">
+                              <label class="baseLabel">省市区：</label>
+                              <input type="hidden" value="" readonly="readonly" lepuEMR-ID="HR03_00_004_01" class="EMRdata">
+                              <input type="hidden" value="" readonly="readonly" lepuEMR-ID="HR03_00_004_02" class="EMRdata">
+                              <input type="hidden" value="" readonly="readonly" lepuEMR-ID="HR03_00_004_03" class="EMRdata">
+                              <span></span>         
+                          <li class="longData" ><label class="baseLabel">详细地址：</label><input type="text" readonly="readonly"  lepuEMR-ID="HR03_00_004_06" class="EMRdata" value="" style="width:350px"></li>
+                          <li class="noArrow" >
+                              <label class="baseLabel">婚姻状况：</label>
+                              <select name="" id="" disabled="disabled" lepuEMR-ID="HR02_06_003" class="EMRdata">
+                              	  <option value=""></option>	
+                                  <option value="10">未婚</option>
+                                  <option value="20">已婚</option>
+                                  <option value="30">丧偶</option>
+                                  <option value="40">离婚</option>
+                                  <option value="90">未说明</option>
+                              </select>
+                          </li>
+                          <li class="noArrow" >
+                              <label class="baseLabel">文化程度：</label>
+                              <select name="" id="" disabled="disabled" lepuEMR-ID="HR02_08_001" class="EMRdata">
+                                  <option value=""></option>
+                                  <option value="90">文盲或半文盲</option>
+                                  <option value="80">小学</option>
+                                  <option value="70">初中</option>
+                                  <option value="60">高中</option>
+                                  <option value="50">技工学校</option>
+                                  <option value="40">中专或者中技</option>                                  
+                                  <option value="30">大学专科</option>
+                                  <option value="20">大学本科</option>
+                                  <option value="10">研究生</option>                                  
+                              </select>
+                          </li>                          
+                        </ul>                    
+                    </div>
+                 <!--    <div role="tabpanel" class="tab-pane" id="healthHistory"></div> -->
+                    <div role="tabpanel" class="tab-pane active diagRecords" id="recordsHistory">
+                               <section class="healthEMR">
+                        <div class="secTitle">
+                          <span>个人体检信息</span>                                  
+                        </div>
+                        <div class="secContent">
+                          <ul class="healthList">
+                            <li>
+                                <span class="healthLabel">血型</span>
+                                <select name="" id="" lepuEMR-ID="HR51_03_003" class="EMRdata">
+                                    <option value=""></option>
+                                    <option value="0">O型</option>
+                                    <option value="1">A型</option>
+                                    <option value="2">B型</option>
+                                    <option value="3">AB型</option>
+                                    <option value="5">不详</option>
+                                </select>
+                            </li>
+                          </ul>                          
+                          <ul class="healthList">
+                            <li><span class="healthLabel">收缩压：</span><span class="Unit">mmHg</span><input type="text" lepuEMR-ID="HR51_02_034" class="EMRdata"></li>
+                            <li><span class="healthLabel">舒张压：</span><span class="Unit">mmHg</span><input type="text" lepuEMR-ID="HR51_02_035" class="EMRdata"></li>
+                            <li><span class="healthLabel">心率:</span><span class="Unit">次/分</span><input type="text" lepuEMR-ID="HR51_02_042" class="EMRdata"></li>
+                            <li style="clear: left;"><span class="healthLabel">身高：</span><span class="Unit">CM</span><input type="text" lepuEMR-ID="HR51_02_003" class="EMRdata bmi" oninput="calBMI()"></li>
+                            <li><span class="healthLabel">体重：</span><span class="Unit">KG</span><input type="text" lepuEMR-ID="HR51_02_004" class="EMRdata bmi" oninput="calBMI()"></li>
+                            <li><span class="healthLabel">BMI:</span><input type="text" lepuEMR-ID="HR51_02_173" class="EMRdata bmi"></li>
+                            <li style="clear: left;"><span class="healthLabel">腰围:</span><span class="Unit">CM</span><input type="text" lepuEMR-ID="HR51_02_175" class="EMRdata ratio" oninput="calRatio()"></li>
+                            <li><span class="healthLabel">臀围:</span><span class="Unit">CM</span><input type="text" lepuEMR-ID="HR51_02_174" class="EMRdata ratio" oninput="calRatio()"></li>
+                            <li><span class="healthLabel">腰/臀:</span><input type="text" lepuEMR-ID="HR51_02_176" class="EMRdata ratio"></li>
+                          </ul>
+                        </div>                        
+                      </section>
+                      
+                        <div class="recordsTitle">本次咨询记录</div>
+                            <section class="recordsUnit">
+                              <span class="recordsLabel">主诉：</span><p class="showAreaContent"></p><textarea lepuEMR-ID="HR51_01_037" class="EMRdata" oninput="showNumber(this)" ></textarea><div class="wordsAmount"><span class="realNumber">0</span>/<span class="maxNumber">200</span></div>
+                            </section>
+
+                            <section class="recordsUnit">
+                              <span class="recordsLabel">病史描述：</span><p class="showAreaContent"></p><textarea lepuEMR-ID="HR51_01_300" class="EMRdata" oninput="showNumber(this)"></textarea><div class="wordsAmount"><span class="realNumber">0</span>/<span class="maxNumber">3000</span></div>
+                            </section>
+
+                            <section class="recordsUnit">
+                              <span class="recordsLabel">诊断：</span><div class="diagnosis">
+	                              	<div class="lepuDiag">
+	                            		<input type="hidden" lepuEMR-ID="Lepu_Diagnosis_Result" class="EMRdata">
+	                            		<div class="diagNormal"></div>
+	                            		<div class="diagHeart"></div>
+	                            		<div class="diagOther"></div>
+	                            	</div>  
+                              </div>
+                            </section>
+
+                            <section class="recordsUnit">
+                              <span class="recordsLabel">处方：</span><!-- 取消空白文本元素
+                           --><div class="prescription">
+                                  <div class="presList">
+                                  		<table>
+                                  			<thead>
+	                                  		<tr>
+	                                  			<th>药名</th>
+	                                  			<th>单次剂量</th>	   
+	                                  			<th>用药频率</th>	                                  			                               			
+	                                  			<th>给药途径</th>
+	                                  			<th>规格</th>
+	                                  			<th>数量</th>
+	                                  			<th>单位</th>
+	                                  			<th>价格</th>
+	                                  		</tr></thead>
+	                                  		<tbody>
+	                                  		<tr class="template">	                                  		
+	                                  			<td><div lepuEMR-ID="HR53_01_002" class="EMRdata" style="min-width: 100px"></div>
+	                                  				<div lepuEMR-ID="HR53_01_010" class="EMRdata hidden"></div></td>
+	                                  			<td><div lepuEMR-ID="HR52_01_013" class="EMRdata" style="min-width: 60px"></div></td>
+	                                  			<td><div lepuEMR-ID="HR52_01_037_01" class="EMRdata medicineFreq" style="min-width:39px"></div> 
+	                                  				<div lepuEMR-ID="medFreqPart1" class="EMRdata medicineFreq_part hidden"></div> 
+	                                  				<div lepuEMR-ID="medFreqPart2" class="EMRdata medicineFreq_part hidden"></div></td>	                                  				                                  			
+	                                  			<td><div lepuEMR-ID="HR52_01_037_05" class="EMRdata hidden"></div>
+	                                  				<div lepuEMR-ID="route" class="EMRdata" style="min-width:30px"></div></td>
+	                                  			<td><div lepuEMR-ID="Lepu_Medicine_Specifications" class="EMRdata Specifications"></div></td>
+	                                  			<td><div lepuEMR-ID="HR53_01_037_04" class="EMRdata"></div></td>
+	                                  			<td><div lepuEMR-ID="Lepu_Medicine_Unit" class="EMRdata"></div></td>
+	                                  			<td><div lepuEMR-ID="Lepu_Medicine_UnitPrice" class="EMRdata hidden"></div>
+	                                  			    <div lepuEMR-ID="Lepu_Medicine_TotalPrice" class="EMRdata lepuMedicinePrice"></div></td>
+                               				</tr></tbody>                               				                               				                               				
+                                  		</table>
+                                  		<div class="livPresShow">
+                                  			<div class="livPresTitle">生活方式处方:
+                                  				<input type="hidden" lepuEMR-ID="Lepu_LivingPrescription_Product" class="EMRdata">
+                                  				<input type="hidden" lepuEMR-ID="Lepu_LivingPrescription_App" class="EMRdata">
+                                  			</div>
+                                  			<div class="productShow"></div>
+                                  			<div class="appShow"></div>
+                                  		</div>
+                                  		<div class="additionInfo">
+                                  			<div class="notation" style="text-align:left">1.医生的回复和咨询内容仅为建议，具体诊疗请前往医院进行。<br>2.如果有相关问题，请致电4000-898-898进行咨询。</div>
+	                                  		<div class="totalFeeShow" style="border-bottom:0;padding-top:10px"></div>
+	                                  		<div class="notation">注：实际收费数额以药店最终的价格（促销等）为准</div>
+                                  		</div>                                       		                                		
+                                  </div>
+                              </div>
+                            </section>
+
+                            <section class="recordsUnit">
+                              <span class="recordsLabel">检查建议：</span><!-- 取消空白文本元素
+                               --><div class="examination">
+                                  <div class="examineList" style="display:block">
+                                  	<div class="examineLeft">检验：<input type="hidden" class="examinPart1"></div><div class="examin1 examineRight"></div>
+                                  	<div class="examineLeft" style="clear:left">检查：<input type="hidden" class="examinPart2"></div><div class="examin2 examineRight"></div>
+                                  </div>                                
+                              </div>
+                            </section>
+
+                            <section class="recordsUnit">
+                              <span class="recordsLabel">其他注意<br>事项：</span><!-- 取消空白文本元素
+                            --><div class="doctorSaid">                                  
+                                  <p class="showAreaContent"></p><textarea style="margin-top:0;" lepuEMR-ID="HR52_02_107" class="EMRdata" oninput="showNumber(this)"></textarea><div class="wordsAmount"><span class="realNumber">0</span>/<span class="maxNumber">3000</span></div>
+                              </div>        
+                              
+                            </section>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="scanHistory">
+                        <ul class="box"></ul>                      
+                    </div>
+                  </div>
+              </div>           
+          </div>         
+      </div>       
+    </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="js/jquery-1.11.1.min.js"></script>  
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="../../js/emr/bootstrap.min.js"></script>     
+    <script src="../../js/emr/common.js"></script>
+    <script src="../../js/emr/EMR_20160505.js"></script> 
+    <script src="../../js/emr/EMRdetail_161110.js"></script>
+    <script src="../../laydate/laydate2.js"></script>
+    <script>
+    //重要的全局变量
+    var dataEMR={};//库中取出的的病历
+    var divBox=$(".EMR");   
+    var medicineSet=[];//电子处方药品集合   
+    
+    var start = {
+    	    elem: '#StartDate',
+    	    format: 'YYYY/MM/DD',    	    
+    	    max: '2099-06-16 23:59:59', //最大日期
+    	    istime: false,
+    	    istoday: false,
+    	    choose: function(datas){
+    	         end.min = datas; //开始日选好后，重置结束日的最小日期
+    	         end.start = datas //将结束日的初始值设定为开始日
+    	    }
+    	};
+    	var end = {
+    	    elem: '#EndDate',
+    	    format: 'YYYY/MM/DD',    	    
+    	    max: '2099-06-16 23:59:59',
+    	    istime: false,
+    	    istoday: false,
+    	    choose: function(datas){
+    	        start.max = datas; //结束日选好后，重置开始日的最大日期
+    	    }
+    	};
+    	laydate(start);
+    	laydate(end);
+    ;!function(){        
+        laydate.skin("danlan");/*皮肤颜色*/
+    }();
+    $(function(){
+    	$(".nav-tabs li a").each(function(){
+    		var href=$(this).attr("aria-controls");
+    		$(this).attr("href","#"+href);
+    	});
+    });
+    </script>       
+  </body>
+</html>

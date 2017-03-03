@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width user-scalable=no" />
+		<meta content="telephone=no" name="format-detection">
+		<title>看诊</title>
+		<link rel="stylesheet" href="../mcss/reset.css" />
+		<link rel="stylesheet" href="../mcss/public.css" />
+		<link rel="stylesheet" href="../mcss/diagnose.css" />
+		<link rel="stylesheet" href="../mcss/footPublic.css" />
+		<link rel="stylesheet" href="../mcss/headPublic.css" />
+		<link rel="stylesheet" href="../mcss/historyCase.css" />
+		<link rel="stylesheet" href="../mcss/mainComplain.css" />
+		<link rel="stylesheet" href="../mcss/smj.css">
+		<link rel="stylesheet prefetch" href="../mcss/photoswipe.css">
+		<link rel="stylesheet prefetch" href="../mcss/default-skin/default-skin.css">
+		<script>
+			var html=document.getElementsByTagName("html")[0];
+			var width=html.getBoundingClientRect().width;
+			html.style.fontSize=width/16+"px";
+		</script>
+  </head>
+  
+  <body>
+    <input type="hidden" id="EMRStatus" value="${param.EMRStatus }"><!--简历保存状态 -->
+		<input type="hidden" id="UserID" value="${param.UserID }">
+  	<input type="hidden" id="ServiceInstitutionID" value="${param.ServiceInstitutionID }"><!--就诊服务站ID-->
+  	 	<section class="EMR" style="height:100%;position:relative;">
+			<header class="head">
+				<form id="goback" action="${pageContext.request.contextPath}/order/todayOrderList" method="post">
+					<input type="hidden" name="LoginID" id="loginid" value="" />
+					<input type="hidden" name="Password" id="password" value="" />
+					<a href="today_order_list.html" class="return_btn" onclick="">返回</a>
+				</form>
+				<h1>
+					<span class="patientName">Name</span>
+					<span>男
+						<!--<c:if test="${UserDetailInfo.Gender eq 0}">未知</c:if><c:if test="${UserDetailInfo.Gender eq 1}">男</c:if><c:if test="${UserDetailInfo.Gender eq 2}">女</c:if><c:if test="${UserDetailInfo.Gender eq 9}">未说明</c:if>-->
+					</span>
+					<span><span class="age"></span>岁</span>
+					<span>初诊
+						<!--<c:if test="${OrderDetailInfo.IsFirstVisit eq 1}">初诊</c:if>
+						<c:if test="${OrderDetailInfo.IsFirstVisit eq 2}">复诊</c:if>-->
+					</span>
+				</h1>
+				<a href="javascript:;" class="history_btn" onclick="searchEMRhistory()">历史病历</a>
+			</header>
+			<!--主体-->
+			<section class="main">
+				<!--主体内容-->
+				<div class="content">
+					<div class="content_head">
+						<div class="type_list">
+							<a href="javascript:;" class="">基本信息</a>
+							<a href="javascript:;" class="checked_tab" >就诊记录</a>
+							<a href="javascript:;" >扫描件</a>
+						</div>
+					</div>
+					<!--基本信息详情-->
+					<ul class="info_detail hide">
+						<span class="EMRdata hidden" lepuEMR-ID="HR00_00_001_05" id="OrderNumber" >${param.OrderNumber }</span>
+						
+						<li class="info_detail_item">
+							<span class="info_detail_item_l">姓名：</span>
+							<span class="info_detail_item_r EMRdata" lepuEMR-ID="HR02_01_002">TrueName</span>
+							<!--医生姓名-->
+							<span class="EMRdata hidden" lepuEMR-ID="HR22_01_100" >${OrderDetailInfo.DoctorName}</span>
+							<span class="EMRdata hidden" lepuEMR-ID="HR00_00_001_03" >${UserDetailInfo.InstitutionName }</span>
+						</li>
+						<li class="info_detail_item clearfix">
+							<span class="fl info_detail_item_l">性别：</span>
+							<span class="fl info_detail_item_r">男<!--<c:if test="${UserDetailInfo.Gender eq 0}">未知</c:if><c:if test="${UserDetailInfo.Gender eq 1}">男</c:if><c:if test="${UserDetailInfo.Gender eq 2}">女</c:if><c:if test="${UserDetailInfo.Gender eq 9}">未说明</c:if>-->
+							</span>
+							<span class="EMRdata hidden" lepuEMR-ID="HR02_02_001">${UserDetailInfo.Gender}</span>
+						</li>
+						<li class="info_detail_item clearfix">
+							<span class="fl info_detail_item_l">出生日期：</span>
+							<span class="fl info_detail_item_r EMRdata" lepuEMR-ID="HR30_00_001">1976-10-20<!--${UserDetailInfo.BirthYear}-${UserDetailInfo.BirthMonth}-${UserDetailInfo.BirthDay}--></span>
+						</li>
+						<li class="info_detail_item clearfix">
+							<span class="fl info_detail_item_l">年龄：</span>
+							<span class="fl info_detail_item_r age">32</span>
+						</li>
+						<li class="info_detail_item clearfix">
+							<span class="fl info_detail_item_l">身份证号：</span>
+							<span class="fl info_detail_item_r EMRdata" lepuEMR-ID="HR01_01_002_02"><!--${UserDetailInfo.IDNumber}-->111111111111111111</span>
+						</li>
+						<li class="info_detail_item clearfix">
+							<span class="fl info_detail_item_l">手机号码：</span>
+							<span class="fl info_detail_item_r EMRdata" lepuEMR-ID="HR04_00_001_03"><!--${UserDetailInfo.MobilePhone}-->12333333333</span>
+						</li>
+						<li class="info_detail_item clearfix">
+							<span class="fl info_detail_item_l">省市区：</span>
+							<span class="fl info_detail_item_r"><!--${UserDetailInfo.Province }${UserDetailInfo.City }${UserDetailInfo.Town }-->北京市海淀区</span>
+							<span class="EMRdata hidden" lepuEMR-ID="HR03_00_004_01">${UserDetailInfo.Province }</span>
+							<span class="EMRdata hidden" lepuEMR-ID="HR03_00_004_02">${UserDetailInfo.City }</span>
+							<span class="EMRdata hidden" lepuEMR-ID="HR03_00_004_03">${UserDetailInfo.Town}</span>
+						</li>
+						<li class="info_detail_item clearfix">
+							<span class="fl info_detail_item_l">详细地址：</span>
+							<span class="fl info_detail_item_r EMRdata" lepuEMR-ID="HR03_00_004_06"><!--${UserDetailInfo.Street}-->上地街道</span>
+						</li>
+						<li class="info_detail_item clearfix">
+							<span class="fl info_detail_item_l">婚姻状况：</span>
+							<span class="fl info_detail_item_r EMRdata"><!--<c:if test="${UserDetailInfo.MaritalStatus eq '10' }">未婚</c:if><c:if test="${UserDetailInfo.MaritalStatus eq '20' }">已婚</c:if><c:if test="${UserDetailInfo.MaritalStatus eq '30' }">丧偶</c:if><c:if test="${UserDetailInfo.MaritalStatus eq '40' }">离婚</c:if><c:if test="${UserDetailInfo.MaritalStatus eq '90' }">未说明</c:if>-->未婚</span>
+							<span class="EMRdata hidden" lepuEMR-ID="HR02_06_003">${UserDetailInfo.MaritalStatus}</span>
+						</li>
+						<li class="info_detail_item clearfix">
+							<span class="fl info_detail_item_l">文化程度：</span>
+							<span class="fl info_detail_item_r EMRdata"><!--<c:if test="${UserDetailInfo.Education eq '10' }">研究生</c:if><c:if test="${UserDetailInfo.Education eq '20' }">大学本科</c:if><c:if test="${UserDetailInfo.Education eq '30' }">大学专科</c:if><c:if test="${UserDetailInfo.Education eq '40' }">中专或中技</c:if><c:if test="${UserDetailInfo.Education eq '50' }">技工学校</c:if><c:if test="${UserDetailInfo.Education eq '60' }">高中</c:if><c:if test="${UserDetailInfo.Education eq '70' }">初中</c:if><c:if test="${UserDetailInfo.Education eq '80' }">小学</c:if><c:if test="${UserDetailInfo.Education eq '90' }">文盲或半文盲</c:if>-->研究生</span>
+							<span class="EMRdata hidden" lepuEMR-ID="HR02_08_001">${UserDetailInfo.Education}</span>
+						</li>
+					</ul>
+					<!--当前就诊记录详情-->
+					<ul class="records EMR">
+						<!--收缩压-->
+						<li class="records_item clearfix">
+							<span class="round fl"></span>
+							<h4 class="fl W3rem">收缩压</h4>
+							<input type="text" lepuemr-id="HR51_02_034" class="inputEMRdata fl EMRdata" onblur="limitNumber(this)" />
+							<span class="unit fr">mmHg</span>
+						</li>
+						<!--舒张压-->
+						<li class="records_item clearfix">
+							<span class="round fl"></span>
+							<h4 class="fl W3rem">舒张压</h4>
+							<input type="text" lepuemr-id="HR51_02_035" class="inputEMRdata fl EMRdata" onblur="limitNumber(this)"  />
+							<span class="unit fr">mmHg</span>
+						</li>
+						<!--心率-->
+						<li class="records_item clearfix">
+							<span class="round fl"></span>
+							<h4 class="fl W3rem">心率</h4>
+							<input type="text" lepuemr-id="HR51_02_042" class="inputEMRdata fl EMRdata" onblur="limitNumber(this)"  />
+							<span class="unit fr">次/分</span>
+						</li>
+						
+						<!--主诉-->
+						<li class="records_item clearfix">
+							<div class="clearfix">
+								<span class="round fl"></span>
+								<h4 class="fl">主诉<span style="color:red;">&nbsp*</span></h4>
+							</div>
+							<div class="input_box">
+								<textarea placeholder="请输入主诉内容" id="mainComInfo" lepuemr-id="HR51_01_037" class="EMRdata"></textarea>
+								<span class="text_num" id="mainNum">0/200</span>
+	<!-- 							<a href="javascript:;" class="select_moudle" id="maiSelMoudle">从模板中选择↑</a> -->
+							</div>
+						</li>
+						
+						<!--病史描述-->
+						<li class="records_item clearfix">
+							<div class="clearfix">
+								<span class="round fl"></span>
+								<h4 class="fl">病史描述<span style="color:red;">&nbsp*</span></h4>
+							</div>
+							<div class="input_box history_description">
+								<textarea placeholder="请输入病史描述" id="hisDesInfo" lepuemr-id="HR51_01_300" class="EMRdata"></textarea>
+								<span class="text_num" id="hisDesNum">0/3000</span>
+							</div>
+						</li>
+						<!--诊断-->
+						<li class="records_item">
+							<div class="clearfix">
+								<span class="round fl"></span>
+								<h4 class="fl">诊断</h4>	
+							</div>
+							<div class="diagnosis" id="diagnose">
+								<div class="top">
+									<span diagNum="lepuDiag001">高血压</span>
+									<span diagNum="lepuDiag002">糖尿病</span>
+									<span diagNum="lepuDiag003">血脂异常</span>
+									<span diagNum="lepuDiag004">心律失常</span>
+								</div>
+								<div class="bottom">
+									<span diagNum="lepuDiag101">冠心病待确诊</span>
+									<span diagNum="lepuDiag102">冠心病需搭桥</span>
+									<span diagNum="lepuDiag103">冠心病需支架</span>
+									<span diagNum="lepuDiag104">冠心病术后</span>
+								</div>
+							</div>
+							<input type="hidden" lepuEMR-ID="Lepu_Diagnosis_Result" class="EMRdata" />
+						</li>
+						<!--处方-->
+						<li class="records_item">
+							<div class="clearfix">
+								<span class="round fl"></span>
+								<h4 class="fl">处方</h4>	
+							</div>
+							<ul class="diagnosis prescription" id="medicine">
+	<!-- 							<li class="item"> -->
+	<!-- 								<span class="EMRdata hide" lepuemr-id="Lepu_Medicine_Specifications">100片</span> -->
+	<!-- 								<span class="EMRdata hide" lepuemr-id="Lepu_Medicine_UnitPrice">0</span> -->
+	<!-- 								<span class="EMRdata hide" lepuemr-id="Lepu_Medicine_Flag">0</span> -->
+	<!-- 								<span class="EMRdata hide" lepuemr-id="HR53_01_010">1745</span> -->
+	<!-- 								<a href="javascript:;" class="modify_btn" onclick="modifyMedicine(this)">编辑</a> -->
+	<!-- 								<a href="javascript:;" class="delete_btn" onclick="deleteMedicine(this)">删除</a> -->
+	<!-- 								<div class="medicine_info"> -->
+	<!-- 									<p class="medicine_name EMRdata" lepuemr-id="HR53_01_002">复方a-酮酸片(开同--100片--北京费森尤新卡比医药有限公司)</p> -->
+	<!-- 									<div lepuemr-id="HR53_01_010" class="EMRdata hidden">1745</div> -->
+	<!-- 									<p>X -->
+	<!-- 										<span lepuemr-id="HR53_01_037_04" class="EMRdata">2</span> -->
+	<!-- 										<span lepuemr-id="Lepu_Medicine_Unit" class="EMRdata">盒</span> -->
+	<!-- 									</p> -->
+	<!-- 								</div> -->
+	<!-- 								<div class="taking_info"> -->
+	<!-- 									<p>每<span lepuemr-id="medFreqPart1" class="EMRdata">日</span> -->
+	<!-- 										<span lepuemr-id="medFreqPart2" class="EMRdata">2</span>次 -->
+	<!-- 										<span lepuemr-id="HR52_01_037_01" class="EMRdata hide">每日2次</span> -->
+	<!-- 									</p> -->
+	<!-- 									<p>每次<span lepuemr-id="HR52_01_013" class="EMRdata">2</span>片</p> -->
+	<!-- 									<p lepuemr-id="route" class="EMRdata">口服</p> -->
+	<!-- 									<span lepuemr-id="HR52_01_037_05" class="EMRdata hidden">1</span> -->
+	<!-- 								</div> -->
+	<!-- 								<div class="pophead hide">总价： -->
+	<!-- 									<span class="EMRdata" lepuemr-id="Lepu_Medicine_TotalPrice"></span>元 -->
+	<!-- 								</div> -->
+	<!-- 							</li> -->
+							</ul>
+							<div class="totalFeeShow_box hide">总计：<span class="totalFeeShow"></span>元</div>
+							<ul class="diagnosis prescription" id="lifestyle_box">
+								<input type="hidden" lepuEMR-ID="Lepu_LivingPrescription_Product" class="EMRdata">
+								<input type="hidden" lepuEMR-ID="Lepu_LivingPrescription_App" class="EMRdata">
+								<!--<li class="item" id="lifestyle_item">
+									<a href="javascript:;" class="modify_btn">编辑</a>
+									<a href="javascript:;" class="delete_btn">删除</a>
+									<div class="medicine_info">
+										<p class="medicine_name">乐普智能音乐电子血压计</p>
+										<p class="medicine_name">乐普普博士手机血糖仪试纸</p>
+										<p class="medicine_name">乐普普博士手机血糖仪试纸</p>
+									</div>
+									<ul class="wechat clearfix">
+										<li class="fl">
+											<img src="../img/ma.png" width="100%" />
+											<p>爱心脏微信</p>
+										</li>
+									</ul>
+								</li>-->
+							</ul>
+							<div class="diagnosis_btns">
+								<a href="javascript:;" class="borderR W300" id="prescBtn" onoff=false>开药</a>
+								<a href="javascript:;" id="lifestyle_btn">生活方式建议</a>
+							</div>
+						</li>
+						<!--检查建议-->
+						<li class="records_item" id="diagnosisBox">
+							<input type="hidden" class="EMRdata" lepuEMR-ID="HR51_96_301_02" />
+							<input type="hidden" class="EMRdata" lepuEMR-ID="HR51_96_001_02" />
+							<div class="clearfix">
+								<span class="round fl"></span>
+								<h4 class="fl">检查建议</h4>	
+							</div>
+							<ul class="diagnosis prescription" id="test_info" style="border-bottom:none;">
+	<!-- 							<li class="item clearfix"> -->
+	<!-- 								<p class="medicine_name fl">蛋白分类(T+A/G)</p> -->
+	<!-- 								<a href="javascript:;" class="fr" onclick="deleteCheckSug(this)">删除</a> -->
+	<!-- 							</li> -->
+								
+							</ul>
+							<ul class="diagnosis prescription" id="check_info">
+	<!-- 							<li class="item clearfix"> -->
+	<!-- 								<p class="medicine_name fl">腹部彩超（肝胆胰脾双肾彩超）</p> -->
+	<!-- 								<a href="javascript:;" class="fr" onclick="deleteCheckSug(this)">删除</a> -->
+	<!-- 							</li> -->
+							</ul>
+							<div class="diagnosis_btns">
+								<a href="javascript:;" class="borderR W300" id="testBtn">检验项目</a>
+								<a href="javascript:;" id="checkBtn">检查项目</a>
+							</div>
+						</li>
+						<!--其他注意事项-->
+						<li class="records_item clearfix">
+							<div class="clearfix">
+								<span class="round fl"></span>
+								<h4 class="fl">其他注意事项</h4>
+							</div>
+							<div class="input_box">
+								<textarea placeholder="输入或从模板选择后修改" id="other_notes" class="EMRdata" lepuemr-id="HR52_02_107"></textarea>
+								<span class="text_num" id="otherNum">0/3000</span>
+								<a href="javascript:;" class="select_moudle" id="otherSelMoudle">从模板中选择↑</a>
+							</div>
+						</li>
+					</ul>
+					<!--扫描件-->
+					<ul class="scan_image hide" id="smj">
+		 					<li class="scan_image_item clearfix" onclick="gotoScanPage(this)"> 
+		 						<span class="fileIcon fl"></span> 
+		 						<span class="time fl">2016-06-24 10:33:20</span> 
+		 					</li>
+		 					<li class="scan_image_item clearfix" onclick="gotoScanPage(this)"> 
+		 						<span class="fileIcon fl"></span> 
+		 						<span class="time fl">2016-06-24 10:33:20</span> 
+		 					</li> 
+						</ul>
+				</div>
+			</section>
+			<!--底部-->
+			<footer class="foot">
+				<div class="bg"></div>
+				<div class="foot_btns">
+					<div class="confirm">
+						<a href="javascript:;" class="borderR" id="temporarySave" onclick="temporary(this)" style="width:40%;">暂存</a>
+						<a href="javascript:;" id="submitLepuEMR" onclick="submitEMR(this)" style="width:60%;">提交病历,并完成看诊</a>
+					</div>
+	<!-- 				<a href="javascript:;" style="width: 100%;" id="diagnose_btn" class="">确定看诊</a> -->
+				</div>
+			</footer>
+			<!-- <input type="text" id="focus" class="" value="获取焦点" style="color:#fff;opacity:0;position:absolute;z-index:-100;" /> -->
+			<!--历史病例弹窗-->
+			<section class="history_box">
+				<header class="pubhead">
+					<h2>历史病历</h2>
+					<span>关闭</span>
+				</header>
+				<ul class="publist_box">
+					<li>
+						<div class="history_content">
+							<div><span>A2016060800003（本次就诊病历）</span></div>
+							<p>医院：北京大学人民医院</p>
+							<p>医生：张仲景 </p>
+							<p>时间：2016-06-08 15:03:49</p>
+						</div>
+					</li>
+				</ul>
+			</section>
+			<!--主诉模板弹窗-->
+			<section class="main_complain_box" id="main_complain_box">
+				<header class="pubhead">
+					<h2>主诉模板</h2>
+					<span>关闭</span>
+				</header>
+				<ul class="main_Complainlist_box" id="main_Complainlist_list">
+					<li>间断呼吸困难2年,加重伴下肢水肿4天.</li>
+					<li>发现血压升高20余年,气喘,心慌6小时.</li>
+					<li>反复劳力性心前区疼痛2年,加重2月.</li>
+					<li>心悸8年,发作性晕厥4年,胸痛伴气短2月.</li>
+					<li>发作性心前区痛伴心悸气短8月,加重1周.</li>
+					<li>发热咽痛,全身倦怠1周,胸闷心悸2天.</li>
+					<li>午后发热2月余,胸闷气短1周.</li>
+					<li>突发性胸背部持续性撕榨样疼痛6小时.</li>
+					<li>反复咳嗽咳痰25年,活动后气促,加重伴下肢浮肿3年.</li>
+				</ul>
+				<footer class="main_Complainfoot" id="mainCompBtn">
+					<div>确定</div>
+				</footer>
+			</section>
+			
+			<!--药品处方弹窗-->
+				<section class="presc_box">
+					<header class="pubhead">
+						<h2>药品处方</h2>
+						<span>关闭</span>
+					</header>
+						<div class="search">
+							<input type="text" class="search_text" placeholder="输入药品拼音" id="searchDrug" oninput="medicineList(this)"/>
+						</div>
+						<div class="result">
+							<ul class="list_box" id="drugList">
+								<!--<li>阿斯匹林肠溶片/ASA</li>
+								<li>α洛汀新（盐酸贝那普利片）</li>
+								<li>ATP片（三磷酸腺苷二钠片）(三磷酸腺苷三磷二 钠片)</li>-->
+							</ul>
+						</div>
+				</section>
+			<!--用法用量弹窗-->
+			<section class="usage_box">
+				<header class="pubhead">
+					<h2>用法用量</h2>
+					<span>关闭</span>
+				</header>
+				<div class="usage_box_main">
+					<div class="drugName">
+						<span></span>
+					</div>
+					<ul class="list_box">
+						<li class="numDiv clearfix" id="medicineNum">
+							<a class="fl minus">-</a>
+							<input type="text" class="numDisplay" value="1" id="medNum" onblur="limitNumber(this)" />
+							<a class="fl add">+</a>
+							<span class="text fl" id="unit">盒</span>
+						</li>
+						<li class="cycle clearfix">
+							<span>每</span>
+							<span class="cycleItem bg">日</span>
+							<span class="cycleItem">晚</span>
+							<span class="cycleItem">2日</span>
+							<span class="cycleItem">3日</span>
+							<span class="cycleItem">周</span>
+							<span class="cycleItem">月</span>
+						</li>
+						<li class="numDiv clearfix">
+							<a class="fl minus">-</a>
+							<input type="text" class="numDisplay" value="1" id="times" onblur="limitNumber(this)" />
+							<a class="fl add">+</a>
+							<span class="text fl">次</span>
+						</li>
+						<li class="Charge">
+							<span>单次剂量</span>
+							<input type="text" value="" id="each"/>
+						</li>
+						<li class="usage clearfix">
+							<span class="bg" value="1">口服</span>
+							<span value="2">直肠给药</span>
+							<span value="3">舌下给药</span>
+							<span value="4">注射给药</span>
+							<span value="5">吸入给药</span>
+							<span value="6">局部给药</span>
+							<span value="9">其他方式给药</span>
+						</li>
+					</ul>
+				</div>
+				<footer class="usagefoot">
+					<div id="usageBtn">确定</div>
+				</footer>
+			</section>
+		
+			<!--生活方式弹窗-->
+			<section class="main_complain_box" id="lifestyle">
+				<header class="pubhead">
+					<h2>生活方式</h2>
+					<span>关闭</span>
+				</header>
+				<ul class="main_Complainlist_box" id="lifestyle_list">
+					<li>
+						<p>乐普压电式雾化器</p>
+						<span class="productPrice hidden">588</span>
+					</li>
+					<li>
+						<p>乐普智能音乐电子血压计</p>
+						<span class="productPrice hidden">238</span>
+					</li>
+					<li>
+						<p>乐普腕式电子血压计</p>
+						<span class="productPrice hidden">79</span>
+					</li>
+					<li>
+						<p>乐普普博士手机血糖仪（冰封银）</p>
+						<span class="productPrice hidden">268</span>
+					</li>
+					<li>
+						<p>乐普普博士血糖仪家庭版</p>
+						<span class="productPrice hidden">75</span>
+					</li>
+					<li>
+						<p>乐普普博士手机血糖仪试纸</p>
+						<span class="productPrice hidden">110</span>
+					</li>
+				</ul>
+				<ul class="App clearfix">
+					<li class="fl">
+						<img src="../mimages/App1.png" />
+						<p appNum="1">同心管家</p>
+					</li>
+					<li class="fl">
+						<img src="../mimages/App2.png" />
+						<p appNum="2">先心管家</p>
+					</li>
+					<li class="fl">
+						<img src="../mimages/App3.png" />
+						<p appNum="3">心衰管理</p>
+					</li>
+					<li class="fl">
+						<img src="../mimages/App4.png" />
+						<p appNum="4">血糖管理</p>
+					</li>
+					<li class="fl">
+						<img src="../mimages/App5.png" />
+						<p appNum="5">爱心脏微信</p>
+					</li>
+				</ul>
+				<footer class="main_Complainfoot" id="confirm_lStyleBtn">
+					<div>确定</div>
+				</footer>
+			</section>
+			
+			<!--检验项目弹窗-->
+			<section class="main_complain_box" id="pop_test">
+				<header class="pubhead">
+					<h2>检验项目</h2>
+					<span>关闭</span>
+				</header>
+				<div class="searchExamination">
+					<input type="text" placeholder="在英文状态下输入拼音首字母模糊搜索(20字以内)" class="search_Examination" SearchType="2" oninput="clinicalExaminationSearch(this,2)" />
+				</div>
+				<ul class="main_Complainlist_box" id="pop_test_result">
+	<!-- 				<li>癌胚抗原（CEA）</li> -->
+	<!-- 				<li>便常规</li> -->
+	<!-- 				<li>C反应蛋白</li>			 -->
+				</ul>
+				<footer class="main_Complainfoot" id="confirm_testBtn">
+					<div>确定</div>
+				</footer>
+			</section>
+			
+			<!--检查项目弹窗-->
+			<section class="main_complain_box" id="pop_check">
+			<header class="pubhead">
+				<h2>检查项目</h2>
+				<span>关闭</span>
+			</header>
+			<div class="searchExamination">
+				<input type="text" placeholder="输入拼音首字母可模糊搜索(20字以内)" class="search_Examination" SearchType="1" oninput="clinicalExaminationSearch(this,1)"/>
+			</div>
+			<ul class="main_Complainlist_box" id="">
+<!-- 				<li>阿托品试验</li> -->
+<!-- 				<li>骶髂关节片</li> -->
+<!-- 				<li>动态心电图</li>	 -->
+			</ul>
+			<footer class="main_Complainfoot" id="confirm_checkBtn">
+				<div>确定</div>
+			</footer>
+		</section>
+		
+			<!--其他注意事项模板选择弹窗-->
+			<section class="main_complain_box" id="otherSel_box">
+				<header class="pubhead">
+					<h2>其他注意事项</h2>
+					<span>关闭</span>
+				</header>
+				<ul class="main_Complainlist_box" id="otherSel_list">
+<!-- 					<li>间断呼吸困难2年,加重伴下肢水肿4天.</li> -->
+<!-- 					<li>发现血压升高20余年,气喘,心慌6小时.</li> -->
+<!-- 					<li>反复劳力性心前区疼痛2年,加重2月.</li> -->
+<!-- 					<li>心悸8年,发作性晕厥4年,胸痛伴气短2月.</li> -->
+<!-- 					<li>发作性心前区痛伴心悸气短8月,加重1周.</li> -->
+<!-- 					<li>发热咽痛,全身倦怠1周,胸闷心悸2天.</li> -->
+<!-- 					<li>午后发热2月余,胸闷气短1周.</li> -->
+<!-- 					<li>突发性胸背部持续性撕榨样疼痛6小时.</li> -->
+<!-- 					<li>反复咳嗽咳痰25年,活动后气促,加重伴下肢浮肿3年.</li> -->
+				</ul>
+				<footer class="main_Complainfoot" id="otherSelBtn">
+					<div>确定</div>
+				</footer>
+			</section>
+				<!--完成就诊弹窗 -->
+			<section class="modal wcjz-modal" id="wcjz-modal">
+	       	 <div class="modal-dialog">
+	            <div class="modal-content">
+	                <div class="modal-header clearfix">
+	                    <button class="close fr" type="button" data-dismiss="modal" aria-hidden="true" onclick="$(this).parents('.modal').hide();">&times;</button>
+	                    <h4>是否合格就诊</h4>
+	                </div>
+	                <div class="modal-body wcjz-modal-body">
+	                    <p id="evaluate">
+	                        <input type="radio" style="display: none" name="isOK" checked id="isOK_1"><span class="radioBox selected" onclick="radioBox(this)" ></span><label for="">合格</label>&nbsp;&nbsp;
+	                        <input type="radio" style="display: none" name="isOK" id="isOK_0"><span class="radioBox" onclick="radioBox(this)" ></span><label for="">不合格</label>&nbsp;&nbsp;
+	                        <input type="radio" style="display: none" name="isOK" id="isOK_2"><span class="radioBox" onclick="radioBox(this)" ></span><label for="">有错误</label>                           
+	                    </p>
+	                    <textarea name="" placeholder="400字以内" id="pl_content" oninput="showNumber(this)"></textarea><div class="wordsAmount"><span class="realNumber">0</span>/<span class="maxNumber">400</span></div>
+	                </div>
+	                <div class="modal-footer">
+	                	<form id="returnTodayOrder" action="${pageContext.request.contextPath}/order/todayOrderList" method="post">
+	                		<input type="hidden" name="LoginID"  value="" />
+							<input type="hidden" name="Password" value="" />
+	                    	<button type="button" class="handleButton" onclick="saveIsOK(this)">提交</button>
+	                    </form>
+	                </div>
+	            </div>
+	        </div>
+	    </section>
+		</section>
+		
+		
+<!--历史病历信息 -->
+		<section class="EMRhistory hide">
+			<header class="head">
+<!-- 				<form id="goback" action="${pageContext.request.contextPath}/morder/todayOrderList" method="post"> -->
+					<input type="hidden" name="LoginID" id="loginid" value="" />
+					<input type="hidden" name="Password" id="password" value="" />
+					<a href="javascript:;" class="return_btn" onclick="goBackHistory()">返回</a>
+<!-- 				</form> -->
+				<h1>
+					<span><!--${UserDetailInfo.TrueName }-->aaa</span>
+					<span>
+						<!--<c:if test="${UserDetailInfo.Gender eq 0}">未知</c:if><c:if test="${UserDetailInfo.Gender eq 1}">男</c:if><c:if test="${UserDetailInfo.Gender eq 2}">女</c:if><c:if test="${UserDetailInfo.Gender eq 9}">未说明</c:if>-->男
+					</span>
+					<span><span class="age"></span>岁</span>
+					<span>
+						<!--<c:if test="${OrderDetailInfo.IsFirstVisit eq 1}">初诊</c:if>
+						<c:if test="${OrderDetailInfo.IsFirstVisit eq 2}">复诊</c:if>-->初诊
+					</span>
+				</h1>
+			</header>
+			<!--主体-->
+			<section class="main" style="bottom:0;">
+				<!--主体内容-->
+				<div class="content">
+					<div class="content_head">
+						<div class="type_list">
+							<a href="javascript:;" class="">基本信息</a>
+							<a href="javascript:;" class="checked_tab" >就诊记录</a>
+							<a href="javascript:;" >扫描件</a>
+						</div>
+					</div>
+					<!--基本信息详情-->
+					<ul class="info_detail hide">
+<!-- 						<span class="EMRdata hidden" lepuEMR-ID="HR00_00_001_05" id="OrderNumber" >${param.OrderNumber }</span> -->
+						<li class="info_detail_item">
+							<span class="info_detail_item_l">姓名：</span>
+							<span class="info_detail_item_r EMRdata" lepuEMR-ID="HR02_01_002"><!--${UserDetailInfo.TrueName }-->TrueName</span>
+							<!--医生姓名-->
+							<span class="EMRdata hidden" lepuEMR-ID="HR22_01_100" >${OrderDetailInfo.DoctorName}</span>
+							<span class="EMRdata hidden" lepuEMR-ID="HR00_00_001_03" >${UserDetailInfo.InstitutionName }</span>
+						</li>
+						<li class="info_detail_item clearfix">
+							<span class="fl info_detail_item_l">性别：</span>
+							<span class="fl info_detail_item_r"><!--<c:if test="${UserDetailInfo.Gender eq 0}">未知</c:if><c:if test="${UserDetailInfo.Gender eq 1}">男</c:if><c:if test="${UserDetailInfo.Gender eq 2}">女</c:if><c:if test="${UserDetailInfo.Gender eq 9}">未说明</c:if>-->男
+							</span>
+							<span class="EMRdata hidden" lepuEMR-ID="HR02_02_001">${UserDetailInfo.Gender}</span>
+						</li>
+						<li class="info_detail_item clearfix">
+							<span class="fl info_detail_item_l">出生日期：</span>
+							<span class="fl info_detail_item_r EMRdata" lepuEMR-ID="HR30_00_001"><!--${UserDetailInfo.BirthYear}-${UserDetailInfo.BirthMonth}-${UserDetailInfo.BirthDay}-->1976-10-22</span>
+						</li>
+						<li class="info_detail_item clearfix">
+							<span class="fl info_detail_item_l">年龄：</span>
+							<span class="fl info_detail_item_r age">32</span>
+						</li>
+						<li class="info_detail_item clearfix">
+							<span class="fl info_detail_item_l">身份证号：</span>
+							<span class="fl info_detail_item_r EMRdata" lepuEMR-ID="HR01_01_002_02"><!--${UserDetailInfo.IDNumber}-->111111111111111111</span>
+						</li>
+						<li class="info_detail_item clearfix">
+							<span class="fl info_detail_item_l">手机号码：</span>
+							<span class="fl info_detail_item_r EMRdata" lepuEMR-ID="HR04_00_001_03"><!--${UserDetailInfo.MobilePhone}-->12322222222</span>
+						</li>
+						<li class="info_detail_item clearfix">
+							<span class="fl info_detail_item_l">省市区：</span>
+							<span class="fl info_detail_item_r"><!--${UserDetailInfo.Province }${UserDetailInfo.City }${UserDetailInfo.Town }-->北京市海淀区</span>
+							<span class="EMRdata hidden" lepuEMR-ID="HR03_00_004_01">${UserDetailInfo.Province }</span>
+							<span class="EMRdata hidden" lepuEMR-ID="HR03_00_004_02">${UserDetailInfo.City }</span>
+							<span class="EMRdata hidden" lepuEMR-ID="HR03_00_004_03">${UserDetailInfo.Town}</span>
+						</li>
+						<li class="info_detail_item clearfix">
+							<span class="fl info_detail_item_l">详细地址：</span>
+							<span class="fl info_detail_item_r EMRdata" lepuEMR-ID="HR03_00_004_06"><!--${UserDetailInfo.Street}-->上地街道</span>
+						</li>
+						<li class="info_detail_item clearfix">
+							<span class="fl info_detail_item_l">婚姻状况：</span>
+<!-- 							<span class="fl info_detail_item_r EMRdata" lepuEMR-ID="HR02_06_003"><c:if test="${UserDetailInfo.MaritalStatus eq '10' }">未婚</c:if><c:if test="${UserDetailInfo.MaritalStatus eq '20' }">已婚</c:if><c:if test="${UserDetailInfo.MaritalStatus eq '30' }">丧偶</c:if><c:if test="${UserDetailInfo.MaritalStatus eq '40' }">离婚</c:if><c:if test="${UserDetailInfo.MaritalStatus eq '90' }">未说明</c:if></span> -->
+							<span class="fl info_detail_item_r EMRdata"><!--<c:if test="${UserDetailInfo.MaritalStatus eq '10' }">未婚</c:if><c:if test="${UserDetailInfo.MaritalStatus eq '20' }">已婚</c:if><c:if test="${UserDetailInfo.MaritalStatus eq '30' }">丧偶</c:if><c:if test="${UserDetailInfo.MaritalStatus eq '40' }">离婚</c:if><c:if test="${UserDetailInfo.MaritalStatus eq '90' }">未说明</c:if>-->未婚</span>
+							<span class="EMRdata hidden" lepuEMR-ID="HR02_06_003">${UserDetailInfo.MaritalStatus}</span>
+						</li>
+						<li class="info_detail_item clearfix">
+							<span class="fl info_detail_item_l">文化程度：</span>
+<!-- 							<span class="fl info_detail_item_r EMRdata" lepuEMR-ID="HR02_08_001"><c:if test="${UserDetailInfo.Education eq '10' }">研究生</c:if><c:if test="${UserDetailInfo.Education eq '20' }">大学本科</c:if><c:if test="${UserDetailInfo.Education eq '30' }">大学专科</c:if><c:if test="${UserDetailInfo.Education eq '40' }">中专或中技</c:if><c:if test="${UserDetailInfo.Education eq '50' }">技工学校</c:if><c:if test="${UserDetailInfo.Education eq '60' }">高中</c:if><c:if test="${UserDetailInfo.Education eq '70' }">初中</c:if><c:if test="${UserDetailInfo.Education eq '80' }">小学</c:if><c:if test="${UserDetailInfo.Education eq '90' }">文盲或半文盲</c:if></span> -->
+							<span class="fl info_detail_item_r EMRdata"><!--<c:if test="${UserDetailInfo.Education eq '10' }">研究生</c:if><c:if test="${UserDetailInfo.Education eq '20' }">大学本科</c:if><c:if test="${UserDetailInfo.Education eq '30' }">大学专科</c:if><c:if test="${UserDetailInfo.Education eq '40' }">中专或中技</c:if><c:if test="${UserDetailInfo.Education eq '50' }">技工学校</c:if><c:if test="${UserDetailInfo.Education eq '60' }">高中</c:if><c:if test="${UserDetailInfo.Education eq '70' }">初中</c:if><c:if test="${UserDetailInfo.Education eq '80' }">小学</c:if><c:if test="${UserDetailInfo.Education eq '90' }">文盲或半文盲</c:if>-->研究生</span>
+							<span class="EMRdata hidden" lepuEMR-ID="HR02_08_001">${UserDetailInfo.Education}</span>
+						</li>
+					</ul>
+					<!--历史就诊记录详情 -->
+					<ul class="records">
+						<!--收缩压-->
+						<li class="records_item clearfix">
+							<span class="round fl"></span>
+							<h4 class="fl W3rem">收缩压</h4>
+							<span style="border:none;" lepuemr-id="HR51_02_034" class="inputEMRdata fl EMRdata"></span>
+							<span class="unit fr">mmHg</span>
+						</li>
+						<!--舒张压-->
+						<li class="records_item clearfix">
+							<span class="round fl"></span>
+							<h4 class="fl W3rem">舒张压</h4>
+							<span style="border:none;" lepuemr-id="HR51_02_035" class="inputEMRdata fl EMRdata"></span>
+							<span class="unit fr">mmHg</span>
+						</li>
+						<!--心率-->
+						<li class="records_item clearfix">
+							<span class="round fl"></span>
+							<h4 class="fl W3rem">心率</h4>
+							<span style="border:none;" lepuemr-id="HR51_02_042" class="inputEMRdata fl EMRdata"></span>
+							<span class="unit fr">次/分</span>
+						</li>
+						
+						<!--主诉-->
+						<li class="records_item clearfix">
+							<div class="clearfix">
+								<span class="round fl"></span>
+								<h4 class="fl">主诉</h4>
+							</div>
+							<div class="history_input_box EMRdata" lepuemr-id="HR51_01_037">主诉内容</div>
+						</li>
+						
+						<!--病史描述-->
+						<li class="records_item clearfix">
+							<div class="clearfix">
+								<span class="round fl"></span>
+								<h4 class="fl">病史描述</h4>
+							</div>
+							<div class="history_input_box history_description EMRdata" lepuemr-id="HR51_01_300"></div>
+						</li>
+						<!--诊断-->
+						<li class="records_item">
+							<div class="clearfix">
+								<span class="round fl"></span>
+								<h4 class="fl">诊断</h4>	
+							</div>
+							<div class="diagnosis diagnosisResult" id="diagnose">
+								<div class="top diagNormal">
+									<span diagNum="lepuDiag001">高血压</span>
+									<span diagNum="lepuDiag002">糖尿病</span>
+									<span diagNum="lepuDiag003">血脂异常</span>
+									<span diagNum="lepuDiag004">心律失常</span>
+								</div>
+								<div class="bottom diagHeart">
+									<span diagNum="lepuDiag101">冠心病待确诊</span>
+									<span diagNum="lepuDiag102">冠心病需搭桥</span>
+									<span diagNum="lepuDiag103">冠心病需支架</span>
+									<span diagNum="lepuDiag104">冠心病术后</span>
+								</div>
+							</div>
+						</li>
+						<!--处方-->
+						<li class="records_item">
+							<div class="clearfix">
+								<span class="round fl"></span>
+								<h4 class="fl">处方</h4>	
+							</div>
+	<!-- 						<div class="totalFeeShow" class="hide"></div> -->
+							<ul class="diagnosis prescription" id="medicine"></ul>
+							<div class="totalFeeShow_box">总计：<span class="totalFeeShow"></span>元</div>
+							<ul class="diagnosis prescription" id="lifestyle_box">
+								<input type="hidden" lepuEMR-ID="Lepu_LivingPrescription_Product" class="EMRdata">
+								<input type="hidden" lepuEMR-ID="Lepu_LivingPrescription_App" class="EMRdata">
+								<li class="item" style="padding-left: 0;" id="lifestyle_item">
+									<div class="medicine_info" style="padding-left:0.75rem;">
+	<!-- 									<div class="medicine_name">'+$(item).html()+'</div> -->
+									</div>
+									<ul class="wechat clearfix">
+										<li class="fl">'+item.innerHTML+'</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+						<!--检查建议-->
+						<li class="records_item">
+							<input type="hidden" class="EMRdata" lepuEMR-ID="HR51_96_301_02" />
+							<input type="hidden" class="EMRdata" lepuEMR-ID="HR51_96_001_02" />
+							<div class="clearfix">
+								<span class="round fl"></span>
+								<h4 class="fl">检查建议</h4>	
+							</div>
+							<ul class="diagnosis prescription" id="test_info">
+<!-- 								<li class="item clearfix"> -->
+<!-- 									<p class="medicine_name fl">检验项目1</p> -->
+<!-- 								</li> -->
+<!-- 								<li class="item clearfix"> -->
+<!-- 									<p class="medicine_name fl">检验项目2</p> -->
+<!-- 								</li> -->
+							</ul>
+							<ul class="diagnosis prescription" id="check_info">
+<!-- 								<li class="item clearfix"> -->
+<!-- 									<p class="medicine_name fl">检查项目1</p> -->
+<!-- 								</li> -->
+<!-- 								<li class="item clearfix"> -->
+<!-- 									<p class="medicine_name fl">检查项目2</p> -->
+<!-- 								</li> -->
+							</ul>
+						</li>
+						<!--其他注意事项-->
+						<li class="records_item clearfix">
+							<div class="clearfix">
+								<span class="round fl"></span>
+								<h4 class="fl">其他注意事项</h4>
+							</div>
+							<div class="history_input_box EMRdata" lepuemr-id="HR52_02_107">其他注意事项</div>
+						</li>
+					</ul>
+				</div>
+			</section>
+		</section>
+<!-- 		扫描件详情 -->
+		<div class="htmleaf-container hide" >
+	        <div class="container">
+	            <div class="row">
+	                <div class="col-md-12">
+	                    <div class="docs-galley">
+	                        <ul class="docs-pictures clearfix my-gallery" data-pswp-uid="1">
+<!-- 	                        	<c:forEach	items="${ListInfo }" var="item"> -->
+<!-- 	                            	<li> -->
+<!-- 	                            		<img data-original="${IMG_HOST }${item.ImagePath }" src="${IMG_HOST }${item.ImagePath }" class="smallImage" onclick="showBigImg(this)"> -->
+<!-- 	                            		<div class="bigImgBox" onclick="hideBigImg(this)"> -->
+<!-- 	                            			<img data-original="${IMG_HOST }${item.ImagePath }" src="${IMG_HOST }${item.ImagePath }" class="bigImage"> -->
+<!-- 	                            		</div> -->
+<!-- 	                            	</li> -->
+<!-- 	                            </c:forEach> -->
+															<li>
+																<figure>
+																	<div>
+																		<a href="../mimages/smj_1.jpg" data-size="286x220">
+																			<img style="height:100%;" src="../mimages/smj_1.jpg">
+																		</a>
+																	</div>
+															</li>
+															<li>
+																<figure>
+																	<div>
+																		<a href="../mimages/smj_2.jpg" data-size="286x220">
+																			<img style="height:100%;" src="../mimages/smj_2.jpg">
+																		</a>
+																	</div>
+														</li>
+	                        </ul>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	        <div id="return" onclick="returnScanList()">返回</div>
+	    </div>
+		
+		
+		
+		<!-- Root element of PhotoSwipe. Must have class pswp. -->
+		<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+		
+		    <!-- Background of PhotoSwipe. 
+		         It's a separate element as animating opacity is faster than rgba(). -->
+		    <div class="pswp__bg"></div>
+		
+		    <!-- Slides wrapper with overflow:hidden. -->
+		    <div class="pswp__scroll-wrap">
+		
+		        <!-- Container that holds slides. 
+		            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+		            Don't modify these 3 pswp__item elements, data is added later on. -->
+		        <div class="pswp__container">
+		            <div class="pswp__item"></div>
+		            <div class="pswp__item"></div>
+		            <div class="pswp__item"></div>
+		        </div>
+		
+		        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+		        <div class="pswp__ui pswp__ui--hidden">
+		
+		            <div class="pswp__top-bar">
+		
+		                <!--  Controls are self-explanatory. Order can be changed. -->
+		
+		                <div class="pswp__counter"></div>
+		
+		                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+		
+<!-- 		                <button class="pswp__button pswp__button--share" title="Share"></button> -->
+		
+<!-- 		                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button> -->
+		
+		                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+		
+		                <!-- element will get class pswp__preloader--active when preloader is running -->
+		                <div class="pswp__preloader">
+		                    <div class="pswp__preloader__icn">
+		                      <div class="pswp__preloader__cut">
+		                        <div class="pswp__preloader__donut"></div>
+		                      </div>
+		                    </div>
+		                </div>
+		            </div>
+		
+		            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+		                <div class="pswp__share-tooltip"></div> 
+		            </div>
+		
+		            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+		            </button>
+		
+		            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+		            </button>
+		
+		            <div class="pswp__caption">
+		                <div class="pswp__caption__center"></div>
+		            </div>
+		
+		        </div>
+		
+		    </div>
+		
+		</div>
+		
+		
+		<script src="../mjs/jquery-1.11.1.min.js"></script>
+		<script src="../mjs/layer/layer.js"></script>
+		<script src="../mjs/tools.js"></script>
+		<script src="../mjs/common.js" ></script>
+		<script src="../mjs/main.js"></script>
+		<script src="../mjs/getEMR.js"></script>
+		<script src="../mjs/saveEMR.js"></script>
+		<script src="../mjs/photoswipe.min.js"></script>
+		<script src="../mjs/photoswipe-ui-default.min.js"></script>
+		<script type="text/javascript" src="../mjs/photoswipe_main.js"></script>
+		<script>
+//			重要的全局变量
+			
+
+			var baseData={};//基本信息
+			var healthRelativeData={};//健康相关信息
+			var recordsData={};//就诊记录    
+			var entireEMR={};//完整病历
+			var dataEMR={};//库中取出的的病历
+			var isHistoryEMROnoff=true;//true:当前病例；false：历史病例
+			
+			var OrderNumber=$("#OrderNumber").html();//病例编号
+			var UserId=$("#UserID").val();
+			var ServiceInstitutionID=$("#ServiceInstitutionID").val();
+			var ScrollTop=0;
+		</script>
+  </body>
+</html>

@@ -1,0 +1,278 @@
+body{
+	font-family: "Microsoft YaHei";
+	color:#5a5a5a;
+}
+a{
+	color:#787878;
+}
+a:hover{
+	text-decoration:underline;
+}
+.container{
+	height:100vh;
+	overflow:auto;
+	padding:15px;
+	background:#e6e6e6;
+}
+input[type="radio"],input[type="checkbox"]{
+	height:15px!important;
+	width:15px!important;
+	min-width:15px!important;
+}
+/* 表单 */
+.lepu-m-form{
+	background:#fff;
+}
+.lepu-m-form .lepu-u-title{
+	height:40px;
+	line-height:40px;
+	font-size:16px;
+	background:#fe875f;
+	color:#fff;
+	padding:0px 15px;
+}
+.lepu-m-form .lepu-u-box{
+	height:150px;
+	padding:15px;
+	font-size:14px;
+	color:#5a5a5a;
+}
+.lepu-m-form .lepu-u-box ul{
+	height:30px;
+	line-height:30px;
+}
+/* 清除浮动 */
+.clear{
+	clear:both;
+	padding:7px 0px;
+}
+.lepu-m-form .lepu-u-box li{
+	float:left;
+	height:26px;
+	line-height:26px;
+	text-align:left;	
+}
+.lepu-m-form .lepu-u-box li input,.lepu-m-form .lepu-u-box li select{
+	width:75%;
+	min-width:120px;
+	height:30px;
+}
+.lepu-m-form .lepu-u-box .lepu-u-tag{
+	margin-left:10px;
+	width:120px;
+	text-align:right;
+	color:#5a5a5a;
+}
+.lepu-m-form .lepu-u-box .date .datebox{
+	height: 30px;
+    min-width: 120px!important;
+    width: 75%!important;
+}
+
+/* 按钮 */
+.lepu-m-form .lepu-u-box .btnBox{
+	float:right;
+	margin:30px 110px;
+}
+.lepu-m-form .lepu-u-box .btnBox .btn{
+	width:98px;
+	height:34px;
+	font-size:16px;
+	color:#fff;
+}
+
+/* tab */
+.lepu-u-tab{
+	margin-top:15px;
+	background:#fff;
+	font-size:14px;
+}
+.lepu-box .lepu-u-tab th{
+    background: #d1d1d1;
+    height:40px;
+}
+.lepu-box .lepu-u-tab th,.lepu-box .lepu-u-tab td{
+	vertical-align:middle;
+    text-align: center;
+    padding:3px 0px;
+    color:#5a5a5a;
+    font-size:14px;
+    height:40px;
+     word-break: break-all;
+}
+.xiangqing{
+	text-decoration:underline;
+}
+.f-order,.f-surplus{
+	border-radius:5px;
+	padding:3px 5px;
+    color: #fff;
+}
+.f-order{
+	background:#5bb95c;
+}
+.f-order:hover{
+	background:#3ba33b;
+	text-decoration:none;
+}
+.f-orderq{
+	background:#5bb99a;
+}
+.f-orderq:hover{
+	background:#3b9c7d;
+	text-decoration:none;
+}
+.f-sup{
+	background:#fe975f;	
+}
+.f-sup:hover{
+	background:#f28f59;	
+}
+.f-surplus{
+	background:#5cc0df;
+}
+.f-surplus:hover{
+	background:#41a7c5;
+	text-decoration:none;
+}
+.btnBox a{
+	white-space:nowrap;
+	display: inline-block;
+    margin-top: 5px;
+}
+.btnBox a:hover{
+	color:#fff;
+}
+/* 分页 */ 
+.lepu-m-page{
+    padding: 10px;
+    line-height:30px;
+    text-align:right;
+    overflow: hidden;
+    font-size:14px;
+}
+.lepu-m-page a,.lepu-m-page .page span{
+	margin-right:5px;
+    height: 24px;
+    line-height: 20px;
+    padding: 7px 10px;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius:3px;
+}
+.lepu-m-page .page .currentPageButton{
+	background: #1fa9ce;
+	color:#fff;
+}
+
+/* 申请补单 */
+.supplementBg{
+	position:absolute;
+	top:0;
+	bottom:0;
+	background:#000;
+	opacity:0.5;
+	display:none;
+	box-sizing:border-box;
+	cursor:pointer;
+}
+.supplementBox{
+	width:700px;
+	height:700px;
+	position:absolute;
+	top:50%;	
+	left:50%;
+	margin-top:-350px;
+	margin-left:-350px;
+	background:#fff;	
+	border-radius:20px;
+	font-size:14px;
+	display:none;
+}
+.supplementBox .closeBtn{
+	position:absolute;
+	top:20px;
+	right:20px;
+	font-size:30px;
+	color:#000;
+	cursor:pointer;
+	font-weight:bold;	
+}
+.supTitle{
+	color:#000;
+	margin-top:40px;
+	text-align:center;
+	font-size:16px;	
+}
+.supLabel{
+	margin:40px 60px;
+	background:#E5F7FB;
+	padding:15px;
+	color:#5A5A5A;
+	line-height:2;
+}
+.supTip{
+	margin-left:60px;
+	color:#969696;	
+}
+.supplementBox span.title{
+	display:inline-block;
+	width:90px;
+	color:#5A5A5A;
+}
+.supDoctor,.supHospital{
+	margin-top:20px;
+	margin-left:60px;		
+}
+.supDoctor select,.supHospital select{
+	width:150px;
+}
+.supTime{
+	margin-top:20px;
+	margin-left:60px;	
+}
+.supTime label{
+	width:40px;
+}
+.supType{
+	margin-top:20px;
+	margin-left:60px;	
+}
+.supDetail{
+	margin:16px 60px 0px 60px;
+	height:100px;
+}
+.supDetail textarea{
+	padding:10px;
+	width:100%;
+	height:120px;
+	border:1px solid #c8c8c8;
+}
+.supBtn{
+	height:100px;
+	width:100%;
+	text-align:center;
+}
+.supBtn button{
+	height:30px;
+	width:100px;
+	color:#fff;
+	text-align:center;
+	border-radius:3px;
+	margin-top:35px;
+	background:#367BB2;
+	border:0;
+}
+.supBtn button+button{
+	margin-left:100px;
+	background:linear-gradient(to bottom,#ffffff,#e7e6e6);	
+	color:#5a5a5a;
+	border:1px solid #9d9d9d;
+	
+}
+.redWord{
+	color:red !important;
+}
+.redBorder{
+	border:1px solid red !important;
+}

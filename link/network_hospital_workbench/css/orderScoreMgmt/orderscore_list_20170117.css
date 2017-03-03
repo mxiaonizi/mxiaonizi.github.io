@@ -1,0 +1,158 @@
+input{
+	outline:0;
+}
+span.label{
+	width: 100px;
+}
+.data li{
+	width: 280px;	
+}
+.TimeSlot input{
+	width: 170px;
+	height: 30px;
+	border: 1px solid #d6d6d8;
+}
+/*订单评分*/
+.totalScore{
+	width: 40%;
+	padding:0 20px;
+	border: 1px solid #B0AFAF;
+	background-color: #fff;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -260px;
+	margin-top: -260px;
+	display: none;
+}
+.totalScore .head{
+	line-height: 40px;
+	text-align: center;
+	position: relative;
+}
+.totalScore .head .close{
+	position: absolute;
+	right: 0px;
+	font-size: 36px;
+	cursor: pointer;
+}
+.totalScore .scoreList .item{
+	width:46%;
+	border: 1px solid #B0AFAF;
+	text-indent: 10px;
+	display: inline-block;
+	vertical-align: top;
+}
+.totalScore .scoreList .item h3{
+	height: 30px;
+	line-height: 30px;
+	background-color: #1eb4ab;
+	border-bottom: 1px solid #B0AFAF;
+	color: #fff;
+	font-size: 14px;
+}
+.totalScore .scoreList .item .scoreDetail{
+	height: 250px;
+	padding: 10px 10px 10px 0;
+}
+.scoreDetail li{
+	line-height: 30px;
+}
+.scoreDetail li p{
+	width: 195px;
+	padding-left: 20px;
+	line-height: 20px;
+}
+.totalScore .scoreList .note{
+	width:100%;
+	margin: 20px 0;
+	display: block;
+}
+.totalScore .scoreList .note p{
+	min-height: 100px;
+	word-wrap:break-word;
+}
+/*质检评定*/
+.checkDetail{
+	padding:0 20px 20px 20px;
+	border: 1px solid #B0AFAF;
+	background-color: #fff;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -180px;
+	margin-top: -160px;
+	display: none;
+}
+.checkDetail .head{
+	line-height: 50px;
+	text-align: center;
+	position: relative;
+	font-size: 16px;
+}
+.checkDetail .checkDetailList .item{
+	width: 300px;
+	border: 1px solid #B0AFAF;
+	margin-bottom: 20px;
+	text-indent: 10px;
+}
+.checkDetail .checkDetailList .item h3{
+	height: 30px;
+	line-height: 30px;
+	background-color: #1eb4ab;
+	border-bottom: 1px solid #B0AFAF;
+	color: #fff;
+	font-size: 14px;
+}
+.checkDetailList .item ul{
+	padding-top: 10px;
+}
+.checkDetailList .item li{
+	line-height: 30px;
+}
+.checkDetail .head .close{
+	position: absolute;
+	right: 0px;
+	font-size: 36px;
+	cursor: pointer;
+}
+/*诊断标签评定*/
+.diagnoseDetail{
+	width: 250px;
+	padding:0 10px 10px 10px;
+	border: 1px solid #B0AFAF;
+	background-color: #fff;
+	position: absolute;
+	left: 50%;
+	top: 40%;
+	display: none;
+}
+.diagnoseDetail .close{
+	font-size: 24px;
+	font-weight: bold;
+	position: absolute;
+	right: 10px;
+	top: 0px;
+	cursor: pointer;
+}
+.diagnoseDetail .title{
+	font-size: 14px;
+}
+.diagnoseDetail .note{
+	min-height: 100px;
+	line-height: 20px;
+	text-indent: 1em;
+	padding: 5px;
+	border: 1px solid #B0AFAF;
+	word-wrap:break-word;
+}
+.mask{
+	position:fixed;
+	left:0;
+	top:0;
+	right:0;
+	bottom:0;
+	background:#000;
+	opacity:0.3;
+	display:none;
+}

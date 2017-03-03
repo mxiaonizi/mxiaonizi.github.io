@@ -1,0 +1,184 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"+ request.getServerName() + ":" + request.getServerPort()+ path + "/";
+%>
+<!DOCTYPE html>
+<html>
+    <head>
+    <link rel="stylesheet" href="<%=path%>/css/osms_base_161101.css" />
+    <link rel="stylesheet" href="<%=path%>/css/schedule/calender.css" />
+    <link rel="stylesheet" href="<%=path%>/css/schedule/time_set.css" />
+    <link rel="stylesheet" href="<%=path%>/css/schedule/time_modify.css" />
+    <%-- <link rel="stylesheet" href="<%=path%>/css/appointment/list.css" />
+    <script src="http://www.skygq.com/ci/scripts/jquery/jquery.skygqOneDblClick.mini.1.0.js"></script> --%>
+    
+    <style>
+    	.container form {overflow:hidden;}
+    	.select-box{margin-top:20px;}
+    	.select-box li{float:left;height:51px;line-height:51px;margin-right:50px;}
+    	.select-box li select{height:30px;line-height:30px;width:150px;}
+    </style>
+    
+    
+    </head>
+    <body>
+        <div class="container">
+        	<input type="hidden" id="infoList" value='${ListInfo}' />
+       		 <form action="getDocScheduleData" method='post' id="form">
+       		 	<input type="hidden" id="ExpertID" name="DoctorID"value="${DoctorID}"/>
+       		 	<input type="hidden" id="DateMonth" name="DateMonth"value="${DateMonth}"/>
+       		 	<input type="hidden" id="HospitalID" name="HospitalID" value="${HospitalID}"/>	          
+	            <ul class="select-box">
+	            	<li>
+		            	<span>医院名称：</span>
+		            	<select name="HospitalList" id="HospitalList" onchange="getDoctorList()"></select>
+		            </li>
+	            	<li>
+	            		<span>医生姓名：</span>
+	            		<select name="expertList" id="expertList"></select>
+	            	</li>
+	            	<li>
+	            		<input type="button" value="查询" class="btn"  onclick="submitData(-1);"/>
+	            	</li>
+	            </ul>		
+	        </form>
+            <div class="calendar clearfix">
+                <div class="top">医生出诊时间表</div>
+                <div class="left">
+                    <div class="cap">
+                        <span>月份</span><span>星期</span>
+                    </div>
+                    <ul>
+                        <li><a href="javascript:;" onclick=""><img src="../images/schedule/prev_month.jpg" height="14" width="48" alt="" />上一月</a></li>
+                        <li></li>
+                        <li><a href="javascript:;" onclick="">下一月<img src="../images/schedule/next_month.jpg" height="14" width="48" alt="" /></a></li>
+                    </ul>
+                </div>
+                <div class="right">
+                 	<table></table>
+                </div>
+            </div>
+            <div class="bg"></div>
+            <div class="pop_window"></div>
+        </div>
+        <script type="text/javascript" src="<%=path%>/js/jquery-1.11.1.min.js"></script>
+    	<script type="text/javascript" src="<%=path%>/js/schedule/doctorSchedule.js"></script>
+        <script type="text/javascript">
+        	
+			var isFirstVisit = "${isFirstVisit}";
+	 		//获取专家列表
+			if(${DateMonth} != null && ${DateMonth} != ''){
+				$(".left li:nth-child(2)").html("${DateMonth}");//赋值月份
+			}
+			getHospitalList();
+			var hospitalID = $("#HospitalID").val();
+			if (!!hospitalID) {
+				getDoctorListByHospitalID(hospitalID);
+			}
+	 		
+	 		//查询
+	 		function submitData(month){ 			
+	 			var DoctorID = $("#expertList").val();
+	 			if(DoctorID == '' || DoctorID == null){
+	 				alert("请选择医生!");
+	 				return;
+	 			}
+	 			if(month != '-1'){
+	 				$("#DateMonth").val(month);
+	 			}
+	 			$("#HospitalID").val($('#HospitalList').val()); 			
+	 			$("#ExpertID").val($('#expertList').val());
+	 			$("#form").submit();
+	 		}
+	 		
+	 		function selectTimeList(month,DoctorID){
+	 			$.ajax({
+	 				type : "post",//无此配置，提交中文乱码
+	 				cache : false,
+	 				dataType : "json",
+	 				data : {
+	 					DateMonth : month,
+	 					DoctorID : DoctorID//获取当前选中专家ID
+	 				},
+	 				url : "${pageContext.request.contextPath}/schedule/getDocScheduleTimeData",
+	 				success : function(data) {
+	 					if (data.Status == "200") {
+	 						createCode(data);
+	 						$(".calendar .right table").html(kalendar_html);
+	 						sitbg();
+	 						$("td").bind("click", calender_cli);
+	 						$(".left li:nth-child(2)").html(month);
+	 					} else {
+	 						alert("获取医生出诊时间列表失败！");
+	 					}
+	 				}
+	 			});
+	 		}
+	 		
+	 		
+	 		 //获取医院列表
+			function getHospitalList(){
+				var html = "<option value=''>---请选择---</option>";	
+				$.post("${pageContext.request.contextPath}/nhdoctor/getHospitalListAjax", {
+					r:Math.random()
+				}, function(data) {
+					var listInfo = data.ListInfo.HospitalList;
+					for(var i=0; i<listInfo.length; i++){					
+						html += "<option value='" + listInfo[i].HospitalID + "'>" + listInfo[i].HospitalName + "</option>";
+					}
+					$("#HospitalList").html(html);
+					$("#HospitalList").val(${HospitalID});
+				});
+			}
+	 		//根据医院ID获取医生列表
+			function getDoctorListByHospitalID(hospitalID) {	
+				var html = "<option value=''>---请选择---</option>";
+				$("#expertList").html(html);
+				$.post("${pageContext.request.contextPath}/nhdoctor/getNHDoctorListAjax", {
+					HospitalID : hospitalID,
+					r : Math.random()
+				}, function(data) {
+					if(data.Status == "200"){
+						$.each(data.ListInfo,function(){
+							html += "<option value="+this.DoctorID+">"+this.DoctorName+"</option>";
+						});
+						$("#expertList").html(html);
+						$("#expertList").val(${DoctorID});
+						$("#ExpertID").val(${DoctorID}); 
+					}else{
+						createPopWindow("获取医生列表失败!");
+					}
+				});
+			}
+			function getDoctorListByHospitalID2(hospitalID){
+				var html = "<option value=''>---请选择---</option>";
+				$("#expertList").html(html);
+				$.post("${pageContext.request.contextPath}/nhdoctor/getNHDoctorListAjax", {
+					HospitalID : hospitalID,
+					r : Math.random()
+				}, function(data) {
+					if(data.Status == "200"){
+						$.each(data.ListInfo,function(){
+							html += "<option value="+this.DoctorID+">"+this.DoctorName+"</option>";
+						});
+						$("#expertList").html(html);
+					}else{
+						createPopWindow("获取医生列表失败!");
+					}
+				});
+			}
+			//获取医生列表
+			function getDoctorList() {
+				var HospitalID = $("#HospitalList").val();			
+				$("#HospitalID").val(HospitalID);
+				if (!!HospitalID) {
+					getDoctorListByHospitalID2(HospitalID);
+				} else {
+					$("#expertList").html("<option value=''>---请选择---</option>");
+				}
+			}
+	    </script>
+    </body>
+</html>

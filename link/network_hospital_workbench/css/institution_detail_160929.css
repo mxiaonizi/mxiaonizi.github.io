@@ -1,0 +1,92 @@
+#title{
+	padding-top:20px;
+}
+.section .info li{
+	width:360px;
+	/* height:40px; */
+	float:left;
+	/* overflow:hidden; */
+	line-height:40px;
+	margin-bottom:10px;
+}
+.section .info li .label{
+	width:120px;
+	display:block;
+	float:left;
+	text-align:right;
+}
+.section .info li input,.section .info li select{
+	width:170px;
+}
+.section .info li select{
+	height:30px;
+	margin-top:4px;
+}
+.section .info input[type=text]{
+	height:30px;
+	margin-top:4px;
+}
+.section .info input[type=checkbox]{
+	width:20px;
+}
+.section .info li.double{
+	width:720px;
+}
+.section .info li.double input{
+	width:530px;
+}
+.section .info li.double select{
+	width:535px;
+}
+.section .info li.three{
+	width:1080px;
+	clear:both;
+}
+.section .info li.three input.text{
+	width:890px;
+}
+.section .info li.three span.prompt{
+	font-size:12px;
+	color:#7f7f7f;
+}
+.section .info li.richtext{
+	clear:both;
+	position:relative;
+	width:100%;
+}
+.section .info li.richtext #editor{
+	position:relative;
+	left:100px;
+	top:0;
+}
+.section ul{
+	padding:20px 15px;
+}
+
+.submit_btn,.submit{
+	/*text-align:center;*/
+	margin-top:20px;
+	margin-left:100px;
+}
+.submit_btn input,.submit input{
+	width: 144px;
+	height: 40px;
+	border: medium none;
+	color: #fff;
+	font-size: 18px;
+	font-weight: bold;
+	background-color:#337aB7;
+	border-radius:5px;
+}
+.modify,.save_btn{
+	display:none;
+}
+.img img{
+	width:80px;
+	height:80px;
+}
+ .get_pwd{
+ 	height:32px;
+ 	margin-top:4px;
+ 	display:none;
+ }

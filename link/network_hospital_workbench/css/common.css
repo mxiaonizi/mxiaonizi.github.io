@@ -1,0 +1,282 @@
+*{
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;	
+}
+body{
+	margin: 0;
+	padding: 0;
+	font-size: 14px;
+	font-family: 微软雅黑 !important;
+}
+html{
+	min-height: 100%;
+	background: #E6E6E6;
+}
+.containerEMR{
+	background: #E6E6E6;
+	padding: 15px;
+	min-width: 1080px;	
+}
+/*操作面板*/
+.panel{	
+	background: #fff;
+	margin-bottom: 30px;
+}
+.panelHead{
+	height: 40px;	
+	line-height: 40px;
+	color: #fff;
+	background: #FE885F;
+	padding-left: 15px;	
+	font-size: 16px;
+}
+div.green{
+	background:#1EB4AB;
+}
+.panelDetail{
+	padding: 30px 24px;
+}
+.panelList li{
+	margin: 10px 0;
+	width: 250px;	
+	list-style: none;
+	display: inline-block;
+}
+.panelList span.labelName{
+	text-align: right;
+	display: inline-block;
+	height: 25px;
+	line-height: 25px;
+	width: 80px;
+	vertical-align: middle;
+	color: #3c3c3c;
+	margin-right: 5px;
+}
+.panelList li input,.panelList li select{
+	height: 30px;
+	width: 140px;
+	vertical-align: middle;
+	border: 1px solid #D6D6D6;
+}
+ul.panelListStatic span.label{
+
+}
+ul.panelListStatic input,ul.panelListStatic select{
+	border: 0;
+}
+
+
+/*蓝色操作按钮*/
+.handleButton{
+	padding:0;
+	background: #337aB7;
+	height: 34px;
+	line-height: 34px;
+	text-align: center;
+	border-radius: 3px;
+	width: 158px;
+	border: 1px solid #2268a4;
+	color: #fff;
+	font-size: 16px;
+	cursor: pointer;
+	font-family: 微软雅黑;
+	vertical-align: middle;
+}
+.handleButton:hover{
+	background: #2e6ea4;
+}
+/*白色取消按钮*/
+button.cancelButton{
+	background: #fff;	
+	border: 1px solid #9D9D9D;
+	color: #9D9D9D;		
+}
+button.cancelButton:hover{
+	background: #f5f5f5;
+}
+/*表格按钮*/
+.tableButton{
+	height: 22px;
+	line-height: 22px;
+	padding: 0 8px;
+	font-size: 14px;
+	color: #fff;
+	cursor: pointer;
+	border-radius: 3px;	
+	font-family: 微软雅黑;
+}
+.greenButton{
+	border: 1px solid #3ba33b;
+	background: #5cb85c;
+}
+.greenButton:hover{
+	background: #53a553;
+}
+/*查找模板按钮*/
+.blueButton{
+	border: 1px solid #41a7c5;
+	background: #5bc0de;
+}
+.blueButton:hover{
+	background: #52acc7;
+}
+
+/*弹窗*/
+.popBox{
+	display: none;	
+}
+.popBox .dialog{	
+	position: fixed;
+	top: 50%;
+	left:50%;
+	-webkit-transform: translate(-50%,-50%);
+	-ms-transform: translate(-50%,-50%);
+	-o-transform: translate(-50%,-50%);
+	transform: translate(-50%,-50%);
+	z-index:1;	
+	background: #fff;	
+	border-radius: 20px;	
+}
+.popBox .mask{	
+	position: fixed;
+	top: 0;	
+	left: 0;
+	width: 100%;
+	height: 100%;	
+	background: #000;
+	opacity: 0.5;
+	filter: alpha(opacity=50);	
+}
+.dialog .dialogClose{
+	cursor: pointer;
+	position: absolute;
+	top:20px;
+	right: 30px;
+	font-weight: bold;
+	font-size: 30px;
+	color: #535353;
+}
+
+/*checkBox*/
+span.checkBox{
+	display: inline-block;
+	width: 14px;
+	height: 14px;
+	border: 1px solid #d2dede;
+	margin-right: 5px;
+	cursor: pointer;
+	vertical-align: middle;
+}
+
+span.checked:after{
+	position: absolute;
+	line-height: 10px;
+	content: '√';
+	color: #1eb4ab;
+	font-weight: bold;
+}
+label{
+	vertical-align: middle;	
+}
+/*radioBox*/
+span.radioBox{
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+	border-radius: 50%;
+	border: 1px solid #1eb4ab;
+	margin-right: 5px;
+	cursor: pointer;	
+}
+span.selected:after{	
+	font-size: 20px;
+	position: absolute;	
+	line-height: 8px;
+	content: '●';
+	color: #1eb4ab;
+}
+
+/*纯消息弹窗*/
+.bgLayer{
+	position: fixed;
+	top:0;
+	left: 0;
+	opacity: 0.1;
+	background: #fff;
+	display:none;
+	z-index:5;
+	cursor:pointer;
+}
+.lepu_popbox{
+	position: fixed;
+	top:50%;
+	left: 50%;
+	background:#fff;
+	display:none;
+	z-index:10;
+	box-sizing:border-box;
+	font-family:微软雅黑;
+	-webkit-transform: translate(-50%,-50%);
+	-ms-transform: translate(-50%,-50%);
+	-o-transform: translate(-50%,-50%);
+	transform: translate(-50%,-50%);
+	border: 2px solid #0EABD4;			
+}
+
+.smallBox{
+	max-width: 400px;
+	min-width: 280px;
+	min-height: 140px;
+	text-align: center;
+	font-size: 18px;
+	line-height:40px;
+	padding:50px 30px;
+}
+
+.bigBox{
+	font-size:16px;
+	line-height:1.6;
+	padding:50px 30px;
+	text-indent:2em;
+	width: 600px;	
+}
+
+div.closeBtn{
+	text-indent:0;
+	position: absolute;
+	top:0px;
+	right: 0px;
+	width: 30px;
+	height: 30px;
+	color: #555;
+	font-size:30px;
+	line-height:1;
+	cursor:pointer;
+}
+
+/*灰色表格*/
+.greyTableBox table{
+	margin-top:15px;
+	width: 100%;
+	color: #333;	
+}
+.greyTableBox table th{
+	background: #D1D1D1;
+	line-height: 40px;	
+	font-weight: normal;
+}
+.greyTableBox table td{
+	text-align: center;
+	background: #fff;
+	line-height: 40px;
+}
+.greyTableBox table td.handleTd button +button{
+	margin-left: 30px;
+}
+/* 时间插件 */
+.laydate_yms{
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	box-sizing: content-box;
+}

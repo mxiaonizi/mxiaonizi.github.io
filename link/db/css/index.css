@@ -1,0 +1,90 @@
+body,p,form{
+	margin: 0;
+}
+ul{
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+a{
+	text-decoration: none;
+}
+.clearfix:after{
+	content: "";
+	display: block;
+	clear: both;
+}
+.fl{
+	float: left;
+}
+.bg{
+	background-image:url(../img/bg.png);
+	background-repeat: no-repeat;
+}
+.wrap{
+	width: 800px;
+	margin: 0 auto;
+	font-family: arial;
+	font-size: 12px;
+}
+.search_box{
+	padding: 20px 0;
+	border-bottom:2px dotted darkcyan ;
+}
+.result_total{
+	text-align: right;
+	line-height: 30px;
+}
+.result .item{
+	padding-top: 20px;
+	border-bottom: 1px dotted #cfcfcf;
+	line-height: 25px;
+}
+.item .img{
+	margin-right: 10px;
+}
+.book_info .title{
+	color: #338cc7;
+	height: 16px;
+	line-height: 16px;
+	display: inline-block;
+}
+.book_info .title:hover,.book_info .note:hover{
+	color: #fff;
+	background-color: #3377aa;
+}
+.book_info .au_pre{
+	color: #666666;
+}
+.comment .score{
+	color: #e09015;
+}
+.book_info .note{
+	color: #bbbbbb;
+	height: 16px;
+	line-height: 16px;
+	display: inline-block;
+}
+.comment .star{
+	width: 56px;
+	height: 11px;
+	display: inline-block;
+}
+.wrap #page{
+	height: 50px;
+	/*display: none;*/
+}
+#page a{
+	font-size: 14px;
+	line-height: 30px;
+	padding: 0 5px;
+	margin-right: 5px;
+}
+#page a:hover{
+	color: #fff;
+	background-color: #3377aa;
+}
+#page .active{
+	color: #fff;
+	background-color: #3377aa;
+}

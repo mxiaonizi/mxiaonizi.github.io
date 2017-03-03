@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    <title>处方查询</title>
+  <meta charset="utf-8" />
+	<meta content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width" name="viewport">
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+	<meta content="telephoe=no" name="format-detection">
+	<link rel="stylesheet" href="../../css/public.css" />
+	<link rel="stylesheet" href="../../css/reset.css" />
+	<link rel="stylesheet" href="../../css/prescription.css" />
+	
+	<script src="../../js/jquery-1.11.1.min.js"></script>
+	
+	
+	<!--省市区三级联动 -->
+	<script src="../../js/common2/area.js"></script>
+	<script src="../../js/common2/location.js"></script>
+	<script src="../../js/common2/select2.js"></script>
+	<script src="../../js/common2/select2_locale_zh-CN.js"></script>
+	<link href="../../js/common2/select2.css" rel="stylesheet"/>
+	
+	<script src="../../js/layer/layer.js"></script>
+	<script>
+		function showPageData(pageNum){
+			$("#ProvinceIDData").val($('#loc_province').val());
+			$("#CityIDData").val($('#loc_city').val());
+			$("#TownIDData").val($('#loc_town').val());
+			
+		
+			if($("#loc_province").val()==""){
+				$("#AreaID").val("");
+			}else{
+				if($("#loc_province").val()!=""){
+					$("#AreaID1").val($('#loc_province').val());
+				}
+				if($("#loc_city").val()!=""){
+					$("#AreaID1").val($('#loc_city').val());
+				}
+				if($("#loc_town").val()!=""){
+					$("#AreaID1").val($('#loc_town').val());
+				}
+			}
+			
+			
+			
+			layer.load(0, {shade: false});
+			
+			$("#fm").attr("action","");
+			fm.submit();
+		}
+	</script> 
+  </head>
+  <body>
+  		<div class="control">
+  			<header class="head">
+				<span>筛选条件</span>
+			</header>
+			<form action="recipemt/getRecipeList?Search=1" method="post" id="fm" name="fm">
+				<ul class="screen clearfix">
+					<li class="TimeSlot fl">
+						<span>
+							<i style="color:red;">*</i>
+							就诊开始：
+						</span>
+						<input id="d5221" autocomplete="off" style="width: 120px;height: 30px; border: 1px solid #d6d6d8;" name="BeginDate" value="" class="Wdate" type="text" onFocus="var d5222=$dp.$('d5222');WdatePicker({maxDate:'#F{$dp.$D(\'d5222\')}'})"/>
+					</li>
+					<li class="TimeSlot fl">
+						<span>
+							<i style="color:red">*</i>
+							就诊结束：
+						</span>
+						<input id="d5222" autocomplete="off"  style="width: 120px;height: 30px; border: 1px solid #d6d6d8;" name="EndDate" value="" class="Wdate" type="text" onFocus="WdatePicker({minDate:'#F{$dp.$D(\'d5221\')}'})"/>
+					</li>
+					<li class="fl">
+						<span>患者姓名：</span>
+						<input type="text" name="TrueName" value=""/>
+					</li>
+					<li class="fl">
+						<span>患者联系方式：</span>
+						<input type="text" name="MobilePhone" value=""/>
+					</li>
+					 <li class="select-box fl">
+	                     <span>医院：</span>
+	                     <input type="hidden" id="saveID" value="${HospitalID}">
+	                     <select name="HospitalID" id="HospitalID" class="Hospital">
+	                     	<option value="">请选择</option>
+	                     </select>
+	                     <input type="hidden" value="${HospitalName}">
+	                 </li>
+	                 <li class="select-box fl">
+	                     <span>医生：</span>
+	                     <input type="hidden" value="${DoctorID}">
+	                     <select name="DoctorID" id="DoctorID" class="Hospital">
+	                     	<option value="">请选择</option>
+	                     </select>
+	                     <input type="hidden" value="${DoctorName}">
+	                 </li>
+					<li class="fl">
+						<span>初/复诊：</span>
+						<select class="Hospital" name="IsFirstVisit">
+							<option value="">请选择</option>
+							<option value="1" <c:if test="${IsFirstVisit eq 1}">selected</c:if>>初诊</option>
+							<option value="2" <c:if test="${IsFirstVisit eq 2}">selected</c:if>>复诊</option>
+						</select>
+					</li>
+					<li class="fl">
+						<span>订单编号：</span>
+						<input type="text" name="OrderNumber" value=""/>
+					</li>
+					<li class="region fl" style="margin-right:60px">
+						<span>所在地：</span>
+						<select id="loc_province" style="width:120px; height: 25px;"></select>
+						<select id="loc_city" style="width:120px;  height: 25px; margin-left:10px"></select>
+						<select id="loc_town" style="width:120px;  height: 25px; margin-left:10px"></select>
+						
+						
+						<input type="hidden" id="AreaID1" name="AreaID"/>
+						
+						<input type="hidden" id="ProvinceIDData" value="${ProvinceID}" name="ProvinceID"/>
+						<input type="hidden" id="CityIDData" value="${CityID}" name="CityID"/>
+						<input type="hidden" id="TownIDData" value="${TownID}" name="TownID"/>
+					</li>
+					<li class="fl PharmacyBox">
+						<span>药店名称：</span>
+						<input type="text" class="PharmacyName" value="" name="InstitutionName" autocomplete="off"/>
+						<ul class="PharmacyUl"></ul>
+					</li>
+					<div class="analyBox fl">
+						<span class="analyInp">查询</span>
+					</div>
+				</ul>
+			</form>
+		</div>
+		<div class="tableBox">
+			<table class="tab" cellpadding="0" cellspacing="0">
+				<tr>
+					<th>订单号</th>
+					<th>患者姓名</th>
+					<th>性别</th>
+					<th>联系方式</th>
+					<th>专家姓名</th>
+					<th>就诊时间</th>
+					<th>就诊医院</th>
+					<th>初/复诊</th>
+					<th>药店名称</th>
+					<th>地区</th>
+					<th>操作</th>
+				</tr>
+				<c:forEach items="${ListInfo}" var="item">
+					<tr class="itamData">
+	                    <td>OrderNumber</td>
+	                    <td>TrueName</td>
+	                    <td>Gender</td>
+	                    <td>MobilePhone</td>
+	                    <td>DoctorName</td>
+	                    <td>ScheduleDate</td>
+	                    <td>HospitalName</td>
+	                    <td>IsFirstVisit</td>
+	                    <td>InstitutionName</td>
+	                    <td>AreaPathName</td>
+	                    <td><a href="javascript:;" class="getRecipeDetail" style="text-decoration:underline">查看处方</a></td>
+	                </tr>
+				</c:forEach>
+            </table>
+           <div class="lepu-m-page">
+	     	<!-- 分页 -->
+	    		<!--<%out.print(request.getAttribute("page").toString()); %>-->
+	 		<!-- 分页 -->
+ 		</div>
+		</div>
+		
+<!-- 		处方详情 -->
+		<div class="boxshadow">
+			<div class="opacity_bg"></div>
+			<div class="boxshadow_prescription clearfix">
+<!-- 				<div class="bs_pres_item fl"> -->
+<!-- 					<header class="pres_head"> -->
+<!-- 						<div class="top"> -->
+<!-- 							<span class="type">普通药处方</span> -->
+<!-- 							<div class="title"> -->
+<!-- 								<img src="images/logoRecipe.png" /> -->
+<!-- 								<h3>乐普心脑血管网络医院处方笺-<strong>1</strong></h3> -->
+<!-- 							</div> -->
+<!-- 							<span class="closeRecipe" >关闭</span> -->
+<!-- 						</div> -->
+<!-- 						<ul class="brief_info clearfix"> -->
+<!-- 							<li class="fl">No. -->
+<!-- 								<span>A2016081900008</span> -->
+<!-- 							</li> -->
+<!-- 							<li class="fl">开方日期： -->
+<!-- 								<span>2016.07.22</span> -->
+<!-- 							</li> -->
+<!-- 							<li class="fl">科别： -->
+<!-- 								<span>内科</span> -->
+<!-- 							</li> -->
+<!-- 							<li class="fl">姓名： -->
+<!-- 								<span>XXX</span> -->
+<!-- 							</li> -->
+<!-- 							<li class="fl">性别： -->
+<!-- 								<span>XX</span> -->
+<!-- 							</li> -->
+<!-- 							<li class="fl">年龄： -->
+<!-- 								<span>XX</span> -->
+<!-- 							</li> -->
+<!-- 							<li class="fl">就诊药店： -->
+<!-- 								<span>春天大药房</span> -->
+<!-- 							</li> -->
+<!-- 						</ul> -->
+<!-- 					</header> -->
+<!-- 					<div class="pres_main clearfix"> -->
+<!-- 						<div class="diagnosis_result fl"> -->
+<!-- 							<h4>初步诊断：</h4> -->
+<!-- 							<ul> -->
+<!-- 								<li>高血压</li> -->
+<!-- 								<li>糖尿病</li> -->
+<!-- 								<li>血脂异常</li> -->
+<!-- 							</ul> -->
+<!-- 						</div> -->
+<!-- 						<div class="medicine fl"> -->
+<!-- 							<h4>Rp:</h4> -->
+<!-- 							<ul class="medicine_info"> -->
+<!-- 								<li class="item clearfix"> -->
+<!-- 									<span class="num fl">1.</span> -->
+<!-- 									<div class="detail fl"> -->
+<!-- 										<div class="medicine_detail"> -->
+<!-- 											<span>阿托伐他汀钙片(优力平)</span> -->
+<!-- 											<span>10mg*14片</span> -->
+<!-- 											<span>4盒</span> -->
+<!-- 											<span>￥80.00</span></div> -->
+<!-- 										<div class="usage_detail"> -->
+<!-- 											<span>用法用量：</span> -->
+<!-- 											<span>口服</span> -->
+<!-- 											<span>每次10mg</span> -->
+<!-- 											<span>每晚一次</span>			 -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 								</li> -->
+								
+<!-- 								<li class="item clearfix"> -->
+<!-- 									<span class="num fl">2.</span> -->
+<!-- 									<div class="detail fl"> -->
+<!-- 										<div class="medicine_detail"> -->
+<!-- 											<span>阿托伐他汀钙片(优力平)</span> -->
+<!-- 											<span>10mg*14片</span> -->
+<!-- 											<span>4盒</span> -->
+<!-- 											<span>￥80.00</span></div> -->
+<!-- 										<div class="usage_detail"> -->
+<!-- 											<span>用法用量：</span> -->
+<!-- 											<span>口服</span> -->
+<!-- 											<span>每次10mg</span> -->
+<!-- 											<span>每晚一次</span>			 -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 								</li> -->
+								
+<!-- 								<li class="item clearfix"> -->
+<!-- 									<span class="num fl">3.</span> -->
+<!-- 									<div class="detail fl"> -->
+<!-- 										<div class="medicine_detail"> -->
+<!-- 											<span>阿托伐他汀钙片(优力平)</span> -->
+<!-- 											<span>10mg*14片</span> -->
+<!-- 											<span>4盒</span> -->
+<!-- 											<span>￥80.00</span></div> -->
+<!-- 										<div class="usage_detail"> -->
+<!-- 											<span>用法用量：</span> -->
+<!-- 											<span>口服</span> -->
+<!-- 											<span>每次10mg</span> -->
+<!-- 											<span>每晚一次</span>			 -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 								</li> -->
+								
+<!-- 								<li class="item clearfix"> -->
+<!-- 									<span class="num fl">4.</span> -->
+<!-- 									<div class="detail fl"> -->
+<!-- 										<div class="medicine_detail"> -->
+<!-- 											<span>阿托伐他汀钙片(优力平)</span> -->
+<!-- 											<span>10mg*14片</span> -->
+<!-- 											<span>4盒</span> -->
+<!-- 											<span>￥80.00</span></div> -->
+<!-- 										<div class="usage_detail"> -->
+<!-- 											<span>用法用量：</span> -->
+<!-- 											<span>口服</span> -->
+<!-- 											<span>每次10mg</span> -->
+<!-- 											<span>每晚一次</span>			 -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 								</li> -->
+								
+<!-- 								<li class="item clearfix"> -->
+<!-- 									<span class="num fl">5.</span> -->
+<!-- 									<div class="detail fl"> -->
+<!-- 										<div class="medicine_detail"> -->
+<!-- 											<span>阿托伐他汀钙片(优力平)</span> -->
+<!-- 											<span>10mg*14片</span> -->
+<!-- 											<span>4盒</span> -->
+<!-- 											<span>￥80.00</span></div> -->
+<!-- 										<div class="usage_detail"> -->
+<!-- 											<span>用法用量：</span> -->
+<!-- 											<span>口服</span> -->
+<!-- 											<span>每次10mg</span> -->
+<!-- 											<span>每晚一次</span>			 -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 								</li> -->
+								
+<!-- 							</ul> -->
+<!-- 							<dl class="doctor"> -->
+<!-- 								<dt class="fl">处方医师：</dt> -->
+<!-- 								<dd class="fl"> -->
+<!-- 									<p>段春华</p> -->
+<!-- 									<p>乐普网络医院</p> -->
+<!-- 									<p>2016.07.22</p> -->
+<!-- 								</dd> -->
+<!-- 								<dt class="fl">审核药师：</dt> -->
+<!-- 								<dd class="fl"> -->
+<!-- 									<p>段春华</p> -->
+<!-- 									<p>乐普网络医院</p> -->
+<!-- 									<p>2016.07.22</p> -->
+<!-- 								</dd> -->
+<!-- 							</dl> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 					<footer class="pres_foot"> -->
+<!-- 						<p class="note">注意：处方限于本院及接诊药店配送，自行下载配药不具有处方效力，为确保用药安全，该方案3日内有效。</p> -->
+<!-- 						<p class="total_price">药品总计: -->
+<!-- 							<span>￥142.00</span> -->
+<!-- 						</p> -->
+<!-- 					</footer> -->
+<!-- 				</div> -->
+			</div>
+		</div>
+		
+		
+		<script src="../../js/My97DatePicker/WdatePicker_161206.js"></script>
+		<script src="../../js/prescription.js"></script>
+		<script>
+			$(document).ready(function() {
+				$("#loc_province").val($("#ProvinceIDData").val()).change();
+				$("#loc_city").val($("#CityIDData").val()).change();
+				$("#loc_town").val($("#TownIDData").val()).change();
+			});
+		</script>
+  </body>
+</html>

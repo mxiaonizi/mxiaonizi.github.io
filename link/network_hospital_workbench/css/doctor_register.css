@@ -1,0 +1,105 @@
+#title{
+	padding-top:20px;
+}
+.section .info li{
+	width:360px;
+	height:50px;
+	float:left;
+	overflow:hidden;
+	line-height:30px;
+}
+.section .info li .label{
+	width:100px;
+	display:block;
+	float:left;
+	text-align:right;
+}
+.section .info li input,.section .info li select{
+	/*width:170px;
+	margin-top: 10px*/
+	
+	height: 30px;
+ 	width: 170px;
+	line-height: 30px;
+	
+  	outline: none;
+  	text-indent: 5px;
+	
+}
+.section .info input[type=checkbox]{
+	width:20px;
+}
+.section .info li.double{
+	width:720px;
+}
+.section .info li.double input{
+	width:530px;
+}
+.section .info li.double select{
+	width:535px;
+}
+.section .info li.three{
+	width:1080px;
+	clear:both;
+}
+.section .info li.three input.text{
+	width:890px;
+}
+.section .info li.three span.prompt{
+	font-size:12px;
+	color:#7f7f7f;
+}
+.section .info li.richtext{
+	clear:both;
+	position:relative;
+	width:100%;
+}
+.section .info li.richtext #editor{
+	position:relative;
+	left:100px;
+	top:0;
+}
+.section ul{
+	padding:20px 15px;
+}
+
+.submit_btn,.submit{
+	/*text-align:center;*/
+	margin-top:20px;
+	margin-left:100px;
+}
+.submit_btn input,.submit input{
+	background: url(../../images/member/submit_btn.png) no-repeat 0 0;
+	border: medium none;
+	color: #fff;
+	font-size: 18px;
+	font-weight: bold;
+	height: 40px;
+	width: 144px;
+}
+.modify,.save_btn{
+	/*display:none;*/
+}
+.img img{
+	width:80px;
+	height:80px;
+}
+#ensureAdd{
+	padding: 0;
+  	background: #337aB7;
+  	height: 34px;
+  	line-height: 34px;
+	text-align: center;
+	border-radius: 3px;
+	width: 158px;
+	border: 1px solid #2268a4;
+	color: #fff;
+	font-size: 16px;
+	cursor: pointer;
+	font-family: "΢���ź�";
+	vertical-align: middle;
+	margin-left:30px;
+}
+.role_select input{
+	vertical-align: bottom;
+}

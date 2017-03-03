@@ -1,0 +1,37 @@
+.container{
+	min-width:1000px;
+}
+ul.data{
+	clear:both;
+	padding:0 0 0 15px;
+}
+ul.data:first-child{
+	padding-top:10px;
+}
+.data li{
+	float:left;
+	width:270px;
+	line-height:40px;
+}
+.data li.all{
+	width:100%;
+}
+.data li select,.method select{
+	width:172px;
+	height:30px;
+	/* padding:3px 0; */
+	/* margin-left:3px; */
+}
+.method{
+	padding-left:15px;
+	line-height:30px;
+}
+.method input[type="button"]{
+	margin-left:25px;
+}
+.method .send_message{
+	background:#90d9fc;
+	padding:2px 4px;
+	border:1px solid #79a8cd;
+	border-radius:3px;
+}

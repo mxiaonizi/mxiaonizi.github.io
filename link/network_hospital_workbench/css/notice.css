@@ -1,0 +1,191 @@
+.main .left,.main .right{
+	width: 45%;
+	position:relative;
+}
+.main .left li{
+	margin-bottom: 20px;
+}
+.main .right li{
+	margin-bottom: 10px;
+}
+.main li>span.label{
+	width: 70px;
+	line-height: 30px;
+	display: inline-block;
+}
+.main .file{
+	border: 0;
+}
+.main .showImg{
+	width: 450px;
+	height: 100px;
+	margin-left: 74px;
+}
+.main .showImg img{
+	width: 100%;
+	height: 100%;
+}
+.main .notice_title{
+	width: 380px;
+}
+.main .timeSet{
+	width: 300px;
+	height: 30px;
+}
+.main .searchType{
+	line-height: 30px;
+	margin-bottom: 10px;
+}
+.choice{
+	width: 430px;
+	overflow: auto;
+    max-height: 193px;
+    padding-left: 10px;
+    margin-bottom: 20px;
+	display: none;
+}
+.choice .region span{
+	/* margin-right: 30px; */
+}
+.main select{
+	width: 100px;
+	height: 30px;
+}
+.main .choice .addInst{
+	margin-left: 333px;
+}
+.choice .list li{
+	line-height: 30px;
+}
+.choice .add,.choice .addInst,.choice .delete2,.choice .delete{
+	height: 25px;
+    display: inline-block;
+    background-color: rgb(255, 255, 255);
+    text-decoration: underline;
+    color: rgb(30, 180, 171);
+    margin-left: 20px;
+    cursor: pointer;
+    padding: 0px 10px;
+    border-width: 1px;
+    border-style: dashed;
+    border-color: rgb(30, 180, 171);
+    border-image: initial;
+    line-height: 25px;
+}
+#choice2 input.pharmacy{
+	width: 255px;
+    height: 25px;
+    border: 1px solid #d6d6d8
+}
+#choice2 .dropDown{
+	width: 253px;
+    position: absolute;
+    left: 66px;
+    border: 1px solid #ccc;
+    border-top: none;
+    z-index: 1000;
+    background: #fff;
+}
+#choice2 .dropDown li{
+    line-height: 30px;
+    font-size: 14px;
+    padding: 0 10px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    overflow: hidden;
+}
+.dropDown li:hover{
+	background:#ccc;
+}
+.submit{
+    width: 158px;
+    height: 40px;
+	padding: 0;
+    background: #337aB7;
+    line-height: 34px;
+    text-align: center;
+    border-radius: 3px;
+    border: 1px solid #2268a4;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    margin:30px 0 0 400px;
+    font-family: "microsoft yahei";
+}
+/*自定义radio*/
+input[type="radio"]+label{
+	width: 50px;
+	height: 25px;
+	position: relative;
+	display: inline-block;
+	padding: 3px 10px 3px 25px;
+}
+input[type="radio"]+label:before{
+	content: "";
+	width: 15px;
+	height: 15px;
+	border-radius: 50%;
+	background: #777980;
+	box-shadow: 0px 0px 3px #A19797;
+	position: absolute;
+	left: 4px;
+	top: 4px;
+}
+input[type="radio"]+label:after{
+	content: "";
+	width: 7px;
+	height: 7px;
+	border-radius: 50%;
+	border: 2px solid #fff;
+	background: #777980;
+	box-shadow: 0px 0px 3px #F2EBEB;
+	position: absolute;
+	left: 6px;
+	top: 6px;
+}
+input[type="radio"]:checked+label:before{
+	background: #1caf9a;
+}
+input[type="radio"]:checked+label:after{
+	background: #1caf9a;
+}
+
+/*编辑修改*/
+.main .edit{
+	display: none;
+}
+.main .read{
+	line-height: 30px;
+}
+.btns{
+	/*margin-top: 30px;*/
+}
+.btns input.modify{
+	width: 158px;
+    height: 40px;
+	padding: 0;
+    background: #337aB7;
+    line-height: 34px;
+    text-align: center;
+    border-radius: 3px;
+    border: 1px solid #2268a4;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    margin:30px 0 0 450px;
+    font-family: "microsoft yahei";
+}
+.read.city_inst{
+	width: 500px;
+	max-height: 280px;
+	overflow: auto;
+}
+.text{
+	line-height: 30px;
+}
+.text p{
+	max-height: 600px;
+	text-indent: 2em;
+	overflow: auto;
+}

@@ -1,0 +1,56 @@
+.bgLayer{
+	position: fixed;
+	top:0;
+	left: 0;
+	opacity: 0.1;
+	background: #fff;
+	display:none;
+	z-index:5;
+	cursor:pointer;
+}
+.lepu_popbox{
+	position: fixed;
+	top:50%;
+	left: 50%;
+	background:#fff;
+	display:none;
+	z-index:20;
+	box-sizing:border-box;
+	font-family:微软雅黑;
+	-webkit-transform: translate(-50%,-50%);
+	-ms-transform: translate(-50%,-50%);
+	-o-transform: translate(-50%,-50%);
+	transform: translate(-50%,-50%);
+	border: 3px solid #0EABD4;			
+}
+
+.smallBox{	
+	min-width: 280px;
+	height: 150px;	
+	text-align: center;
+	font-size: 18px;
+	line-height:150px;
+	padding:0 10px;
+}
+
+.bigBox{
+	font-size:16px;
+	line-height:1.6;
+	padding:50px 30px;
+	text-indent:2em;
+	width: 600px;
+	min-height: 300px;
+}
+
+div.closeBtn{
+	text-indent:0;
+	position: absolute;
+	top:0px;
+	right: 0px;
+	width: 30px;
+	height: 30px;
+	color: #555;
+	font-size:30px;
+	line-height:1;
+	cursor:pointer;
+}

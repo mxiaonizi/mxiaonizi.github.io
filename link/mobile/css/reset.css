@@ -1,0 +1,21 @@
+body,p,form,h3{
+	margin: 0;
+}
+ul,ol{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+img{
+	margin: 0;
+	vertical-align: top;
+}
+a{
+	-webkit-tap-highlight-color:transparent;
+	text-decoration: none;
+}
+input {
+	-webkit-appearance:none;
+	margin: 0;
+	padding: 0;
+}

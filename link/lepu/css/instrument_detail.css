@@ -1,0 +1,134 @@
+body{
+	color: #666666;;
+}
+.instrument{
+	margin: 0 auto;
+	font-size: 14px;
+	padding-top: 40px;
+	border-top: 1px solid #d9dfe2;
+}
+.instrument .instrument_head{
+	width: 1280px;
+	margin: 0 auto;
+	border-bottom: 1px solid #e3e3e3;
+	padding-bottom: 30px;
+}
+.instrument .instrument_head .top{
+	width: 848px;
+	margin: 0 auto;
+	padding-bottom: 30px;
+	text-align: center;
+	font-size: 0;
+}
+.instrument .instrument_head .top a{
+	height: 20px;
+	line-height: 20px;
+	border-left: 1px solid #d9dfe2;
+	border-right: 1px solid #d9dfe2;
+	padding: 0 30px;
+	color: #666666;
+	display: inline-block;
+	font-size: 14px;
+	margin-right: -1px;
+}
+.instrument .instrument_head .top a.active{
+	color: #bac4ca;
+}
+.instrument .instrument_head .bottom{
+	text-align: center;
+	
+}
+.instrument .instrument_head .bottom a{
+	width: 98px;
+	height: 27px;
+	line-height: 27px;
+	border: 1px solid#d4dade;
+	color: #afbac1;
+	text-align: center;
+	margin-right: 30px;
+	display: inline-block;
+}
+.instrument .instrument_head .bottom a.active{
+	background-color: #afbac1;
+	color: #fcfdfd;
+}
+.instrument .main .main_top{
+	padding: 70px 100px 50px 125px;
+	border-bottom: 1px solid #e9edf0;
+}
+.instrument .main .main_top a{
+	width: 523px;
+	height: 330px;
+	margin-right: 58px;
+}
+.instrument .main .main_top .used_for h4{
+	font-size: 26px;
+	line-height: 72px;
+	margin-bottom: 27px;
+}
+.main_top .used_for .info{
+	width: 464px;
+	border-top: 1px solid #e9edf0;
+	margin-left: 10px;
+	line-height: 18px;
+	color: #666666;
+	padding-top: 20px;
+}
+.main_top .used_for .info p{
+	margin-bottom: 10px;
+}
+.main_top .used_for .info p.mb20{
+	margin-bottom: 20px;
+}
+/*目录*/
+.main{
+	
+	width: 1280px;
+	margin: 0 auto;
+}
+.main .directory{
+	height: 42px;
+	line-height: 42px;
+	border-bottom: 1px solid #e6ebee;
+	text-indent: 100px;
+}
+.main .directory a{
+	color: #616161;
+}
+.main .directory span{
+	color: #b2bdc3;
+}
+/*药品说明*/
+.medicine_intro{
+	
+}
+.instrument_intro .tag{
+	border-bottom: 1px solid #e9edf0;
+	padding-left: 103px;
+}
+.instrument_intro .tag a{
+	width: 80px;
+	height: 80px;
+	line-height: 80px;
+	border-radius: 50%;
+	border: 1px solid #afbac1;
+	color: #666666;
+	text-align: center;
+	margin: 25px 35px 18px 0;
+	
+}
+.instrument_intro .tag a.active{
+	color: #FFFFFF;
+	background-color: #afbac1;
+}
+.medicine_intro_detail{
+	width: 960px;
+	margin: 0 auto;
+	padding-top: 30px;
+}
+.medicine_intro_detail a{
+	width: 100%;
+	height: 490px;
+	display: inline-block;
+	margin-bottom: 40px;
+}

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="../../css/osms_base_161101.css" />
+        <link rel="stylesheet" href="../../css/ordermgmt/order_handle.css" />
+        <!-- <link rel="stylesheet" href="../../css/ordermgmt/list.css" /> -->
+        <script type="text/javascript" src="../../js/jquery-1.11.1.min.js"></script>
+    </head>
+    <body>
+    <div class="container" style="margin-right:20px;">
+        <div class="title">订单详情</div>
+        <div class="tableinfo">
+            <ul class="data_onlyread clearfix">
+                <li><span class="label">订单编号：</span>A201602030001</li>
+                <li><span class="label">订单状态：</span>
+					已下单
+					<!--<c:if test="${DetailInfo.OrderStatus == 4}">已下单</c:if>
+					<c:if test="${DetailInfo.OrderStatus == 5}">已取消</c:if>
+					<c:if test="${DetailInfo.OrderStatus == 7}">完成看诊</c:if>					
+					<c:if test="${DetailInfo.OrderStatus == 10}">已爽约</c:if>
+					<c:if test="${DetailInfo.OrderStatus == 11}">待诊</c:if>
+					<c:if test="${DetailInfo.OrderStatus == 12}">医生做好准备</c:if>					-->
+					               
+                </li>
+                <li><span class="label">患者姓名：</span><!--${DetailInfo.TrueName}-->aaa</li>
+                <li><span class="label">预约专家姓名：</span><!--${DetailInfo.DoctorName}-->DoctorName</li>
+                <li><span class="label">预约就诊时间：</span><!--${DetailInfo.AppointmentDate} -->2016-12-11</li>
+                <li><span class="label">就诊类型：</span>远程会诊    
+                	<!--<c:if test="${DetailInfo.ServiceType == '1'}">远程会诊 </c:if>
+                    <c:if test="${DetailInfo.ServiceType == '2'}">专家面诊</c:if>-->
+                    
+                </li>
+                <li><span class="label">诊室：</span><!--${DetailInfo.ConsultRoomName}-->一诊室</li>
+                 <li><span class="label">折后价格：</span><!--${DetailInfo.Price*DetailInfo.Discount/100}-->56.6</li>
+            	<c:if test="${DetailInfo.ServiceType == '1'  }">
+            		<li><span  class="label">经理姓名：</span><!--${DetailInfo.ContactName}-->经理姓名</li>
+            	</c:if>
+            	<c:if test="${DetailInfo.ServiceType == '1'  }">
+            		<li><span  class="label">经理电话：</span><!--${DetailInfo.ContactPhone}-->12334543212</li>
+            	</c:if>
+            	<c:if test="${DetailInfo.ServiceType == '1'  }">
+            		<li><span  class="label">陪诊姓名：</span><!--${DetailInfo.AssistantName}-->张三</li>
+            	</c:if> 
+            	<c:if test="${DetailInfo.ServiceType == '1'  }">
+            		<li><span  class="label">陪诊电话：</span><!--${DetailInfo.Phone}-->32221111111</li>
+            	</c:if>            	
+            	
+            	<c:if test="${DetailInfo.ServiceType == '1'  }">
+            		<li style="width:100%"><span  class="label">就诊地址：</span><!--${DetailInfo.AreaPathName}  ${DetailInfo.Address} -->北京市海淀区</li>
+            	</c:if>
+            	<li style="width:100%">
+            		<!--<c:choose>-->
+                 	 	<!--<c:when test="${DetailInfo.ServiceType == '1' }">
+                 	 		<span style="width:170px;margin-left:30px;">就诊网络医院服务站名称：</span><!--${DetailInfo.InstitutionName}-->
+                 	 	</c:when>
+                 	 	
+                 	 	<!--<c:otherwise>-->
+                 	 		<span  class="label">就诊医院：</span>乐健东外门门诊，心脏会诊中心
+                 	 	<!--</c:otherwise>-->
+                 	 <!--</c:choose>-->
+            	</li>
+            </ul>
+            <div class="order_record clearfix">
+                <div class="left">订单维护记录</div>
+                <div class="right">
+                    <table cellspacing="0">
+                        <tr>
+                            <td>内容</td>
+                            <td>时间</td>
+                            <td>操作人</td>
+                        </tr>
+                        <c:forEach items="${ListInfo}" var="item" varStatus="status">
+                        <tr>
+                             <td>${item.CancelReason}
+                            	<!--<c:if test="${item.OperationType == '1'}">撤销订单【撤销原因${item.CancelReason}】</c:if>
+								<c:if test="${item.OperationType == '2'}">订单改期【${item.CancelReason}】</c:if>
+								<c:if test="${item.OperationType == '3'}">删除</c:if>
+								<c:if test="${item.OperationType == '4'}">订单完成【${item.CancelReason}】</c:if>         
+								<c:if test="${item.OperationType == '5'}">患者约爽【${item.CancelReason}】</c:if>
+								<c:if test="${item.OperationType == '6'}">患者做好准备【${item.CancelReason}】</c:if>
+								<c:if test="${item.OperationType == '7'}">医生做好准备【${item.CancelReason}】</c:if>
+								
+								<c:if test="${item.OperationType == '8'}">订单评价</c:if>
+								<c:if test="${item.OperationType == '9'}">暂存病历</c:if>
+								<c:if test="${item.OperationType == '10'}">保存病历</c:if> -->                                   
+                            </td>
+                            <td>${item.RecordCreateTime}</td>
+                            <td>${item.DoctorName}</td>
+                        </tr>
+                        </c:forEach>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
+</html>

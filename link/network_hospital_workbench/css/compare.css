@@ -1,0 +1,94 @@
+.control{
+	width: 98%;
+	height: 260px;
+	margin: 0 auto 20px;
+	border:1px solid #e5e5e5;
+	position:relative;
+}
+
+.control .head{
+	width: 100%;
+	height: 40px;
+	background-color: #1eb4ab;
+	font: 16px/40px "微软雅黑";
+	color: #fff;
+}
+.head span{
+	margin-left: 15px;
+}
+
+.region div{
+	width: 100px;
+	height: 50px;
+}
+.TimeSlot span,.region span,.frequency span{
+	font: 14px "微软雅黑";
+	color: #595959;
+}
+.screen li p{
+	width:80px;
+	text-align: right;
+	margin-right:10px;
+}
+.frequency select{
+	width: 120px;
+	height: 30px;
+	color: #595959;
+	border: 1px solid #e5e5e5;
+}
+.screen li{
+	margin:30px 50px;
+}
+
+.analyBox{
+	/* margin-top: 50px; */
+	position:absolute;
+	right:40%;
+	top:180px;
+}
+.analyBox .analyInp{
+	width: 96px;
+	height: 32px;
+	border: 1px solid #2268a4;
+	border-radius: 5px;
+	display: block;
+	background-color: #347ab8;
+	padding: 0 10px;
+	font: 16px/32px "微软雅黑";
+	color: #fff;
+	margin: 0 auto;
+	cursor: pointer;
+	text-align: center;
+}
+
+.tableBox .tab{
+	width: 98%;
+	margin: 0 auto;
+	font-size:14px;
+}
+
+.tab tr{
+	height: 40px;
+	text-align: center;
+}
+.tab td,.tab th{
+	border: 1px solid #e6e6e6;
+	text-align: center;
+}
+.tab th{
+	font: 16px "微软雅黑";
+	background-color: #1eb4ab;
+	text-align: center;
+}
+
+.tab a{
+	color: #38b9ef;
+}
+.patientTotal{
+	width:98%;
+	text-align:right;
+	font-size:16px;
+	line-height:30px;
+	font-family:"microsoft yahei";
+	font-weight:bold;
+}

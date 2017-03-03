@@ -1,0 +1,47 @@
+
+.window{
+    position:relative;
+    padding:30px;
+     /* width:920px; */
+}
+.window .caption{
+    color: #5a5a5a;
+    font-size: 16px;
+    margin:10px 0 20px 30px;
+}
+.window .close{
+    position:absolute;
+    right:20px;
+    top:14px;
+}
+.window .time_info{
+    border:1px solid #acdcfc;
+}
+.window .time_info .top{
+    padding:15px 0px;
+    border:1px solid #acdcfc;
+    text-align:center;
+}
+.window .time_info .top span+span{
+    margin-left:80px;
+}
+.window .time_info .middle{
+    padding:15px;
+    border:1px solid #acdcfc;
+}
+.window .time_info .middle li{
+    float:left;
+    width:145px;
+}
+.window .time_info .middle li.red{
+	color:#f00;
+}
+.window .time_info .bottom{
+    padding:15px;
+    border:1px solid #acdcfc;
+    text-align:center;
+    margin:0;
+}
+.window .time_info .bottom input+input{
+    margin-left:60px;
+}

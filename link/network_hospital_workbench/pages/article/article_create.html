@@ -1,0 +1,136 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    
+    <title>通知公告上传</title>
+    <meta charset="utf-8" />
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+	<link rel="stylesheet" href="../css/reset.css" />
+	<link rel="stylesheet" href="../../js/umeditor1_2_2-utf8-jsp/themes/default/css/umeditor.css" />
+	
+	<link rel="stylesheet" href="../../css/osms_base_161101.css" />
+	<link rel="stylesheet" href="../../css/notice.css" />
+		
+		
+		<style>
+			.Wdate{
+				border-color: #ccc;
+			}
+			.edui-container{
+				margin: -22px 0 0 73px;
+			}
+		</style>
+
+  </head>
+  
+  <body>
+    <div class="container">
+				<form id="Iform" method="post" action="${pageContext.request.contextPath}/nhArticle/submit">
+			<header>
+				<h2 class="title">通知公告上传</h2>
+			</header>
+			<div class="main clearfix">
+		            
+		            <input type="hidden" id="targetID" name="targetID" value=""/>
+		            <input type="hidden" id="targetName" name="targetName" value=""/>
+					<ul class="left fl">
+						<li>
+							<span class="label">标题：</span>
+							<input type="text" name="articleTitle" class="notice_title" placeholder="30字之内" maxlength="30" />
+						</li>
+						<li>
+							<span class="label">发布时间：</span>
+							<input type="text" name="publishDate" class="Wdate timeSet" onfocus="WdatePicker({minDate:'%y-%M-%d',dateFmt:'yyyy-MM-dd HH:mm:ss'})" />
+						</li>
+						<li>
+							<span class="label">封面图：</span>
+							<input type="hidden" id="cover" name="cover" value="">
+							<input type="file" class="file" id="file" />
+							<div class="showImg">
+								<img src="" />
+							</div>
+						</li>
+						<li>
+							<span class="label">文章类型：</span>
+							<select name="linkTargetType">
+								<option value="">--请选择--</option>
+								<option value="0">不可点击</option>
+								<option value="-1">默认文本</option>
+							</select>
+						</li>
+					</ul>
+					<div class="right fl">
+						<div class="searchType" id="isCityCond">
+							<span>省市/药店：</span>
+							<input type="radio" class="radio" name="areaType"  id="check-1" value="1" checked="checked" hidden /><label for="check-1">省市区</label>
+							<input type="radio" class="radio" name="areaType"  id="check-2" value="2" hidden /><label for="check-2">选药店</label>
+							<input type="radio" class="radio" name="areaType"  id="check-3" value="3" hidden /><label for="check-3">全国</label>
+						</div>
+						<div id="choice" class="choice" style="display: block;">
+							<ul class="list">
+								<div style="margin-bottom:10px;">
+									<select id="loc_province" style="width:100px; height: 25px;"></select>
+									<select id="loc_city" style="width:100px;  height: 25px; margin-left:10px"></select>
+									<select id="loc_town" style="width:100px;  height: 25px; margin-left:10px"></select>
+									<span class="add">添加</span>
+								</div>
+							</ul><!--所在地-->
+						</div>
+						<div id="choice2" class="choice">
+							<ul class="list2">
+								<li class="listLi2" SelectState="false">
+									<span>选药店：</span><input type="text" class="pharmacy" oninput="fuzzySearchInstitution(this)" placeholder="输入药店名称，选择药店进行搜索" data-instName="" data-instID="" /><span class="delete2">删除</span>
+									<ul class="dropDown" style="display:none"></ul>
+								</li>
+							</ul><!--药品搜索-->
+							<span class="addInst" onclick="addInstitution()">添加</span>
+						</div>
+						<div class="choice"></div>
+						<div>
+							<span>服务站类型：</span>
+							<select name="institutionType">
+								<option value="0">全部</option>
+								<option value="2">药店</option>
+								<option value="8">诊所</option>
+							</select>
+						</div>
+					</div>
+			</div>
+			<p style="line-height: 30px;">文章正文：</p>
+			<script  id="UMeditor"  type="text/plain" name="articleContent" style="width: 960px;height: 400px;"></script>
+			</form>
+			<input type="submit" class="submit" value="提交" />
+		</div>
+		
+		
+		<script src="../../js/jquery-1.11.1.min.js"></script>
+		<script src="../../js/layer/layer.js"></script>
+		<!--日期控件-->
+		<script src="../../js/My97DatePicker/WdatePicker_161206.js"></script>
+		<!--地区-->
+		<script src="../../js/common2/area.js"></script>
+		<script src="../../js/common2/location.js"></script>
+		<script src="../../js/common2/select2.js"></script>
+		<script src="../../js/common2/select2_locale_zh-CN.js"></script>
+		<link href="../../js/common2/select2.css" rel="stylesheet"/>
+		<!--UMeditor-->
+		<script src="../../js/umeditor1_2_2-utf8-jsp/umeditor.min.js"></script>
+		<script src="../../js/umeditor1_2_2-utf8-jsp/umeditor.config.js"></script>
+		<script src="../../js/umeditor1_2_2-utf8-jsp/lang/zh-cn/zh-cn.js"></script>
+		<script src="../../js/notice.js"></script>
+		<script>
+			<!--实例化编辑器-->
+			var um=UM.getEditor("UMeditor");
+			//地区药店切换
+			$(".searchType input").on("click",function(){
+				$(".choice").hide();
+				$(".choice").eq(($(this).index()-1)/2).show();
+			})
+		</script>
+  </body>
+</html>

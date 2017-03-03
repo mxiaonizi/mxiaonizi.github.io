@@ -1,0 +1,113 @@
+html,body,.content{
+    height: 100%;
+    overflow:hidden;
+}
+.content{
+    width: 100%;
+    padding: 15px;
+    background: #e6e6e6;
+    overflow:auto;
+}
+.table-box{
+    margin-top: 15px;
+    margin-bottom:80px;
+}
+.table-box table{
+    background: #fff;
+}
+.table-box table th,.table-box table td{
+    text-align: center;
+    color:#5a5a5a !important;
+}
+.table-box table th{
+    background: #d1d1d1;
+}
+.table-box table td{
+	vertical-align: middle!important;
+}
+.table-box table td a.btn{
+    padding: 3px;
+}
+
+
+/* 下载专区 */
+.tools{
+	width:300px;
+}
+.tools button{
+	width:24px;
+	height:24px;
+	border:0;
+	margin-right:20px;
+}
+.download{	
+	background:url("../images/download/dl.png") no-repeat;
+	background-size:cover;
+}
+.edit{	
+	background:url("../images/download/edit.png") no-repeat;
+	background-size:cover;
+}
+.delete{
+	background:url("../images/download/delete.png") no-repeat;
+	background-size:cover;
+}
+table.table td:first-child{
+	text-align:left;
+	padding-left:80px;
+	line-height:30px;
+}
+table.table span{
+	vertical-align:middle;
+}
+table.table span.fileName{	
+	display:inline-block;	
+	max-width:500px;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
+}
+table.table button{
+	display:none;
+}
+table.table tr:hover button{
+	display:inline-block;
+}
+.sortDown:after{
+	content:"";
+	display:inline-block;
+	vertical-align:bottom;
+	margin-left:5px;
+	width:0;
+	height:0;
+	border-width:10px 5px 5px 5px;
+	border-style:solid;
+	border-color:#595959 transparent transparent transparent;
+}
+.sortUp:after{
+	content:"";
+	display:inline-block;
+	vertical-align:top;
+	margin-left:5px;
+	width:0;
+	height:0;
+	border-width:5px 5px 10px 5px;
+	border-style:solid;
+	border-color:transparent transparent #595959 transparent;
+}
+.topToolBox{
+	margin-bottom:20px;
+}
+.topToolBox div{
+	position:relative;
+	display:inline-block;
+	overflow:hidden;	
+}
+.topToolBox div input#uploadFile{
+	position:absolute;
+	opacity:0;
+	font-size:22px;		
+}
+.topToolBox div + button{
+	margin-left:30px;
+}

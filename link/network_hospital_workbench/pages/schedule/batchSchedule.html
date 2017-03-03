@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+    	<meta charset="utf-8" />
+    <link rel="stylesheet" href="../../css/osms_base_161101.css" />
+    <link rel="stylesheet" href="../../css/schedule/calender.css" />
+    <link rel="stylesheet" href="../../css/schedule/time_set.css" />
+    <link rel="stylesheet" href="../../css/schedule/time_modify.css" />
+    
+    <style>
+    	.container form {overflow:hidden;}
+    	.select-box{margin-top:20px;}
+    	.select-box li{float:left;height:51px;line-height:51px;margin-right:50px;}
+    	.select-box li select{height:30px;line-height:30px;width:150px;}
+    </style>
+    
+    
+    </head>
+    <body>
+        <div class="container">
+        	<input type="hidden" id="infoList" value='${ListInfo}' />
+        	<input type="hidden" id="isFirstVisit" value='${isFirstVisit}' />
+       		<form action="getBatchSchedulePage" method='post' id="form">
+       		 	<input type="hidden" id="DateMonth" name="DateMonth"value="${DateMonth}"/>
+       		 	<input type="hidden" id="HospitalID" name="HospitalID" value="${HospitalID}"/> 	          
+	            <ul class="select-box">
+	            	<li>
+		            	<span>医院名称：</span>
+		            	<select name="HospitalList" id="HospitalList" onchange="submitData(-1);"></select>
+		            </li>
+	            </ul>		
+	        </form>
+            <div class="calendar clearfix">
+                <div class="top">医生出诊时间表</div>
+                <div class="left">
+                    <div class="cap">
+                        <span>月份</span><span>星期</span>
+                    </div>
+                    <ul>
+                        <li><a href="javascript:;" onclick=""><img src="../../images/schedule/prev_month.jpg" height="14" width="48" alt="" />上一月</a></li>
+                        <li>${DateMonth}</li>
+                        <li><a href="javascript:;" onclick="">下一月<img src="../../images/schedule/next_month.jpg" height="14" width="48" alt="" /></a></li>
+                    </ul>
+                </div>
+                <div class="right">
+                 	<table></table>
+                </div>
+            </div>
+            <div style="text-align:center;margin-top:50px;"><input type="button" value="确定" class="btn" id="schedule" /></div>
+            
+            <div class="bg"></div>
+            <div class="pop_window">
+            	<div class="window">
+			        <img src="../../images/schedule/close.png" height="25" width="25" alt="" class="close" />
+			        <div class="caption">医生出诊时间排期</div>
+			        <div class="time_info">
+			            <div class="timeOrder" style="font-size:16px;">
+			            	<table>
+							    <tr>
+							        <td></td>
+							        <td><label><input id="am" type="checkbox" />上午</label></td>
+							        <td><label><input id="pm" type="checkbox" />下午</label></td>
+							    </tr>
+							    <tr>
+					                <td>出诊号数：</td>
+			                		<td>（<span><input id="amNum" type="text" disabled /></span>）</td>
+			                		<td>（<span><input id="pmNum" type="text" disabled /></span>）</td>
+					            </tr>
+							</table>
+			            </div>
+			            <div class="bottom btn">
+			                <input type="button" value="取消" />
+			                <input type="button" value="确定" onclick="saveForm(this);"/>
+			            </div>
+			        </div>
+			    </div>
+            </div>
+        </div>
+        <script type="text/javascript" src="../../js/jquery-1.11.1.min.js"></script>
+        <script type="text/javascript" src="../../js/layer/layer.js"></script>
+    	<script type="text/javascript" src="../../js/schedule/batchSchedule.js"></script>
+        <script type="text/javascript">
+//      	getHospitalList();
+        	
+        	setAPmStatus("#am","#amNum");
+        	setAPmStatus("#pm","#pmNum");
+        	
+        	function setAPmStatus(obj1,obj2){
+        		$(obj1).on("change",function(){
+        			if($(obj1).is(":checked")){
+	        			$(obj2).removeAttr("disabled");
+	        		}else{
+	        			$(obj2).attr("disabled","disabled");
+	        			$(obj2).val("");
+	        		}
+        		})
+        	}
+        	
+        	 //获取医院列表
+//			function getHospitalList(){
+//				var html = "<option value=''>---请选择---</option>";	
+//				$.post("${pageContext.request.contextPath}/nhdoctor/getHospitalListAjax", {
+//					r:Math.random()
+//				}, function(data) {
+//					var listInfo = data.ListInfo.HospitalList;
+//					var HospitalID = ${HospitalID};
+//					for(var i=0; i<listInfo.length; i++){
+//						if(HospitalID == listInfo[i].HospitalID){
+//							html += "<option value='" + listInfo[i].HospitalID + "' selected>" + listInfo[i].HospitalName + "</option>";
+//						} else {
+//							html += "<option value='" + listInfo[i].HospitalID + "'>" + listInfo[i].HospitalName + "</option>";
+//						}
+//					}
+//					$("#HospitalList").html(html);
+//					$("#HospitalID").val(${HospitalID});
+//				});
+//			}
+			//查询
+	 		function submitData(month){
+	 			if(month != '-1'){
+	 				$("#DateMonth").val(month);
+	 			}
+	 			var HospitalID = $("#HospitalList").val();
+	 			if(HospitalID == ''){
+	 				layer.msg("请选择医院！",{icon:2});
+	 				return;
+	 			}
+	 			$("#HospitalID").val($('#HospitalList').val()); 
+	 			form.submit();
+	 		}
+			
+	 		$(".window .close,.window input[type=button]:first-child").click(function(){
+               $(".bg").hide();
+               $(".pop_window").hide();
+             });
+	 		
+	 		function selectTimeList(DateMonth,HospitalID){
+	 			$.ajax({
+	 				type : "post",//无此配置，提交中文乱码
+	 				cache : false,
+	 				dataType : "json",
+	 				data : {
+	 					DateMonth : DateMonth,
+	 					HospitalID : HospitalID
+	 				},
+	 				url : "${pageContext.request.contextPath}/schedule/getHospitalScheduleData",
+	 				success : function(data) {
+	 					if (data.Status == "200") {
+	 						createCode(data);
+	 						sitbg();
+	 					} else {
+	 						alert("获取医院出诊时间列表失败！");
+	 					}
+	 				}
+	 			});
+	 		}
+	    </script>
+    </body>
+</html>
