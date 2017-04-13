@@ -259,5 +259,13 @@
 			$(".num").html("欢迎您，您是第<span style='color: red;font-weight: bold;'>"+visits+"</span>个访客")	
 	        // -->
 	    </script>
+	    
+		<script type="text/javascript">  
+			thisURL = document.URL;  
+			strwrite = 
+			"<img src='https://chart.googleapis.com/chart?cht=qr&chs=150x150&choe=UTF-8&chld=L|4&chl="
+			 + thisURL + "' width='150' height='150' alt='网址URL 二维码生成' />"; 
+			document.write( strwrite );  
+		</script>
 	</body>
 </html>
